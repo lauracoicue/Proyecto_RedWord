@@ -17,9 +17,13 @@ git clone git@github.com:lauracoicue/proyecto_RedWord.git
 cd proyecto_RedWord
 ```
 
-### 2. Ejecuta la aplicación
+### 2. Instalar dependencias
 ```sh
-cd proyecto_RedWord
+npm install
+```
+
+### 3. Ejecuta la aplicación
+```sh
 npm run dev
 ```
 
