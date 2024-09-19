@@ -13,14 +13,14 @@ Usa esta serie de pasos para ejecutar la aplicación de forma correcta.
 
 ### 1. Clonar repositorio
 ```sh
-git@github.com:lauracoicue/proyecto_RedWord.git
+git clone git@github.com:lauracoicue/proyecto_RedWord.git
 cd proyecto_RedWord
 ```
 
 ### 2. Ejecuta la aplicación
 ```sh
-cd proyecto_RedWord npm run dev
-
+cd proyecto_RedWord
+npm run dev
 ```
 
 ## Tecnologías
