@@ -2,14 +2,122 @@
 console.log ("javascript")
 ---
 
-
-<header class="py-8 px-4 mx-auto max-w-xl lg:py-16 lg:px-6">
-    <img src="/public/logo.jpg" alt="">
-    <nav class="flex flex-col items-end justify-between w-full text-center md:flex-row">
-        <a class="text-red-500" href="Primer link">Terminos y <br> condiciones</a>
-        <a class="text-red-500" href="link2">Politica de <br> privacidad</a>
-        <a class="text-red-500" href="link3">Manual de <br> usuarios</a>
-        <a class="text-red-500" href="link4">Conoce sobre <br> nosotros</a>
-    </nav>   
+<header class="header whapper">
+    <div class="flex items-center justify-between">
+        <a class="logo inline-flex items-center pl-4 float-left" href="/">
+            <img src="/logo.jpg" loading="eager" alt="Logo_redwork" width="150" height="33" decoding="async">
+        </a>
+        <button class="abrir-menu" id="abrir">|||</button>
+    </div>
+    <nav class="nav" id="nav">
+        <button class="cerrar-menu text-white" id="cerrar" >Devolver</button>
+        <ul class="menu bg-secondary-100 [&>li]:mx-4 lg:flex justify-end text-justify">
+            <li class="item-menu group">
+                <div class="Conoce-default">
+                    <a class="text-red-500" href="#">Sobre nosotros</a>
+                </div>
+            </li>
+            <li class="item-menu group">
+                <div class="Terminos-default">
+                    <a class="text-red-500" href="#">Terminos y condiciones</a>
+                </div>
+            </li>
+            <li class="item-menu group">
+                <div class="button Politica-default"> 
+                    <a class="text-red-500" href="#">Politica de privacidad</a>
+                </div>
+            </li>
+            <li class="item-menu group">
+                <div class="button Manual-default">
+                    <a class="text-red-500" href="#Primer link">Manual de usuario</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
 </header>
+<style>
+*{margin:0; padding:0;}
+.header {
+    width: 100%;
+    overflow:hidden;
+    padding: 0.2rem 1rem;
+    
+}
+.logo{
+    max-width: 6rem;
+}
+.whapper{
+    width: 100%;
+    max-width: 1500px;
+    margin:auto;
+    overflow:hidden;
+}
+.nav{
+    float:right;
+    line-height: 3rem;
+}
+.menu{
+    list-style-type: none;
+    display: flex;
+    gap:1rem;
+}
+.cerrar-menu{
+    display: none;
+    float: left;
+}
+.abrir-menu{ 
+    display: none;
+    float: right;;
+    transform: rotate(90deg);
+}
+@media screen and (max-width: 1050px) {
+    .abrir-menu, 
+    .cerrar-menu{
+        display:block;
+    }
+    .nav{
+        opacity: 0;
+        visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        gap: 1rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgb(182, 66, 66) ;
+        padding: 2rem;
+        box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+    }
+    .nav.visible{
+        opacity: 1;
+        visibility: visible;
+    }
+    .menu{
+        flex-direction: column;
+        align-items: end;
+    }
+    .menu li a{
+        color: white;
+    }
 
+}
+</style>
+<script>
+    const nav = document.querySelector("#nav");
+    const abrir = document.querySelector("#abrir");
+    const cerrar = document.querySelector("#cerrar");
+
+    if (abrir) {
+    abrir.addEventListener("click", () => {
+        nav?.classList.add("visible");
+    });
+}
+    if (cerrar) {
+    cerrar.addEventListener("click", () => {
+        nav?.classList.remove("visible");
+    });
+}
+    
+</script>
