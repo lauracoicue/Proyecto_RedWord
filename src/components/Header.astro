@@ -2,7 +2,7 @@
 console.log ("javascript")
 ---
 
-<header class="header whapper">
+<header class="header whapper py-1 lg:flex lg:justify-between lg:items-center">
     <div class="flex items-center justify-between ">
         <a class="logo inline-flex items-center pl-4 float-left" href="/">
             <img src="/logo.jpg" loading="eager" alt="Logo_redwork" width="150" height="33" decoding="async">
@@ -13,8 +13,8 @@ console.log ("javascript")
         <button class="cerrar-menu text-black ms-3" id="cerrar"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
           </svg>
-          </button>
-        <ul class="menu bg-secondary-100 [&>li]:mx-4 lg:flex justify-end text-justify">
+        </button>
+        <ul class="menu bg-secondary-100 [&>li]:mx-4 lg:flex justify-center text-center ">
             <li class="item-menu group">
                 <div class="Conoce-default">
                     <a class="text-red-500" href="#">Sobre nosotros</a>
@@ -38,8 +38,8 @@ console.log ("javascript")
         </ul>
     </nav>
 </header>
-<style>
-*{margin:0; padding:0;}
+<style is:global>
+
 .header {
     width: 100%;
     overflow:hidden;
@@ -58,6 +58,7 @@ console.log ("javascript")
 .nav{
     float:right;
     line-height: 3rem;
+    height: 100%;
 }
 .menu{
     list-style-type: none;
@@ -73,7 +74,8 @@ console.log ("javascript")
     float: right;;
     transform: rotate(90deg);
 }
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1024px) {
+    
     .abrir-menu, 
     .cerrar-menu{
         display:block;
@@ -111,15 +113,22 @@ console.log ("javascript")
     const nav = document.querySelector("#nav");
     const abrir = document.querySelector("#abrir");
     const cerrar = document.querySelector("#cerrar");
+    const buscador = document.querySelectorAll(".buscador");
 
     if (abrir) {
     abrir.addEventListener("click", () => {
         nav?.classList.add("visible");
+        buscador.forEach((element) => {
+            element.classList.add("-z-10");
+        });
     });
 }
     if (cerrar) {
     cerrar.addEventListener("click", () => {
         nav?.classList.remove("visible");
+        buscador.forEach((element) => {
+            element.classList.remove("-z-10");
+        });
     });
 }
     

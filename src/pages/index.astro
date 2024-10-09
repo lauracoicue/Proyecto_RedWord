@@ -1,68 +1,93 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
+import Buscador from '../components/Buscador.astro';
+import Boton from '../components/Boton.astro';
+import Item from '../components/Item.astro';
+import CorazonSvg from '../svgs/CorazonSvg.astro';
+import MensajeSvg from '../svgs/MensajeSvg.astro';
+import RedSvg from '../svgs/RedSvg.astro';
+
+const infoItems = [
+	{
+		title: 'Conecta',
+		description: 'Explora perfiles de trabajadores cercanos a tu ubicación y selecciona al candidato ideal para tu necesidad.',
+		svg: RedSvg
+	},
+	{
+		title: 'Solicita sus servicios',
+		description: 'Accede a los mejores trabajadores en tu área y solicita sus servicios de manera rápida y sencilla.',
+		svg: MensajeSvg
+	},
+	{
+		title: 'Confía',
+		description: 'Encuentra al trabajador que mejor se adapta a tus expectativas y resuelve tus necesidades con personas cercanas a ti.',
+		color: 'yellow-300',
+		svg: CorazonSvg
+	}
+]
+
 ---
 
 <Layout title="RedWork">
-		<main class="divide-y-4 divide-slate-150 justify-center">
-		<div class="flex flex-col relative items-center justify-center h-48 overflow-hidden">
-			<img class="invisible  md:visible my-3" src="/hero.jpg" alt="">
-			<button class="absolute text-black text-center py-4 rounded-full mx-28 px-4 border-black">Navegacion</button>
-		  </div>
-		<section class="invisible  md:visible my-3 container mx-auto ">
-			<header class="mx-auto">
-				<h1 class="mt-16 text-center font-bold text-lg">Si buscas ofrecer tus servicios o encontrar excelentes trabajadores <br>
-					¡ RedWord es tu mejor opción!</h1>
-					<h3 class="text-gray-700 text-center">Ayudando a miles de trabajadores informales</h3>
-			</header>
-			<main class="columns-2 flex justify-center ">
-				<div class="mx-auto">
-					<img class="img-2 mt-32 ms-20" src="/imagen2.jpg" height="350px" width="350px" alt="">
-					<img class="img-1 -mt-56 ms-6 " src="/image 3.jpg" height="340px" width="340px" alt="">
+	<Buscador/>
+	<section class="md:hidden mx-auto"> 
+		<h3 class="text-center text-gray-600"> Hoy hay más de <b>50</b> trabajadores ofreciendo <br> sus servicios</h3>
+		<img src="/hero2.jpg" alt="" class="w-full h-full object-cover mobile-view">
+	</section>
+	<section class="md:hidden my-32 mx-auto flex flex-col items-center justify-center">
+		<h3 class="text-center">Si buscas ofertar tus servicios <br> ¡RedWork es tu mejor aliado!</h3>
+		<button class="bg-red-500 text-white py-2 w-1/3 rounded-full mt-10">Crea tu cuenta</button>
+	</section>
+	<section  class="columns-2 justify-center items-center mobile-view md:hidden">
+			<h2 class="text-center text-5xl"><b>+50</b></h2>
+			<h1 class="text-center text-gray-600">Trabajadores<br> activos</h1>
+		
+			<h2 class="text-center text-5xl"><b>+100</b></h2>
+			<h1 class="text-center text-gray-600"> Clientes<br>satisfechos</h1>
+
+	</section>
+    <section class=" my-24 container mx-auto desktop-view">        
+		<header class="mx-auto">
+            <h1 class="text-center font-bold text-lg">Si buscas ofrecer tus servicios o encontrar excelentes trabajadores <br> ¡RedWord es tu mejor opción!</h1>
+            <h3 class="text-gray-700 text-center my-4">Ayudando a miles de trabajadores informales</h3>        
+		</header>
+        <main class="columns-2 mt-8 flex justify-center items-center py-4">            
+			<div class="mx-auto my-auto">
+            	<img class="" src="/imagen_trabajador.png"  alt="Imagen de un trabajador con un cliente">
+            </div>
+            <div class="flex flex-col items-center">                    
+				<h2 class="text-center font-bold">Te ayudamos a encontrar clientes de una <br> manera segura y rapida
+                    <h3 class="text-center text-gray-700 my-2 ">Haz que tu perfil sea visible para miles de clientes</h2>                
+				<div class="mx-7 py-10">
+                    <h3 class="text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-600 absolute">                        
+						<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                      </svg><b class="text-black ml-7">Redistro gratuito.</b> Encuentra nuevas oportunidades hoy.</h3>                    
+					<h3 class="text-gray-700"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-600 absolute">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg><b class="text-black ml-7"> Solicidudes cada dia. </b> Trabajos que se adapten a tu perfil.</h3>
+                    <h3 class="text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-600 absolute">                        
+						<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                      </svg><b class="text-black ml-7"> Completa tu perfil.</b> Muestra que eres un excelente trabajador.</h3>                
 				</div>
-				<div class="class= mx-8 mt-24 ms-20 py-16">
-						<h2 class="mt-14 mr-44 text-center font-bold">Te ayudamos a encontrar clientes de una <br> manera segura y rapida
-						<h3 class="text-gray-700 ">Haz que tu perfil sea visible para miles de clientes</h2>
-					<div class="-mx-7 py-10">
-						<img class="float-left" src="/imagen4.jpg" alt=""> 
-						<h3 class="text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-600 absolute">
-							<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-						  </svg><b class="text-black ml-7">Redistro gratuito.</b> Encuentra nuevas oportunidades hoy.</h3>
-						<h3 class="text-gray-700"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-600 absolute">
-							<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-						  </svg><b class="text-black ml-7"> Solicidudes cada dia. </b> Trabajos que se adapten a tu perfil.</h3>
-						<h3 class="text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-600 absolute">
-							<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-						  </svg> <b class="text-black ml-7"> Completa tu perfil.</b> Muestra que eres un excelente trabajador.</h3>
-					</div>
-					<div class="py-11">
-						<button class="text-white mx-28 py-2 bg-red-500 px-16 shadow-inner rounded-full font-bold">Registrate</button>
-					</div>
-				</div>
-			</main>
-		</section>
-		<section class="invisible  md:visible my-3 container mx-auto">
-			<div class="text-center py-20">
-				<h1 class="font-bold">Encuentra a tu próximo trabajador de confianza</h1>
-			</div>
-			<div class="columns-3 justify-center">
-				<h3 class="text-gray-1000 my-2">Conecta</h3>
-				<p class="text-gray-700 "> Explora perfiles de trabajadores <br> cercanos a tu ubicación y selecciona <br> al candidato ideal para tu necesidad.</p>
-				<br>
-				<h3 class="text-gray-1000 my-2">Solicita sus servicios</h3>
-				<p class="text-gray-700 ">Accede a los mejores trabajadores <br> en tu área y solicita sus servicios de <br> manera rápida y sencilla.</p>
-				<br>
-				<h3 class="text-gray-1000 my-2 ml-10">Confía</h3>
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 text-yellow-300 size-10 absolute ">
-				<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
-				</svg>
-				<p class="text-gray-700 ml-10">Encuentra al trabajador que mejor <br> se adapta a tus expectativas y <br> resuelve tus necesidades con <br> personas cercanas a ti.</p>
-			</div>
-			<div class="text-center py-24">
-				<button class="text-white font-bold mx-28 py-2 bg-red-500 px-16 shadow-inner rounded-full">Buscar</button>
-			</div>
-		</section>
-	</main>
+                <Boton texto='Registro' link='#' />
+            </div>
+        </main>    
+	</section>
+    <section class="desktop-view my-3 container mx-auto">
+        <div class="text-center py-20">            
+			<h1 class="font-bold">Encuentra a tu próximo trabajador de confianza</h1>
+        </div>       
+		<div class="flex">
+			{infoItems.map((item) => (
+				<Item titulo={item.title} contenido={item.description}>
+					{<item.svg/>}
+				</Item>
+			))}
+		</div> 
+		
+        <div class="text-center py-24">
+			<Boton texto='Buscar' link='#buscador' />
+        </div>   
+	</section>
 </Layout>
 
 
