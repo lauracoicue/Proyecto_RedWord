@@ -266,7 +266,7 @@ body {
 
     .input-container i {
         margin-right: 10px; /* Espacio entre el ícono y el input */
-        color: #333; /* Color del ícono */
+        color: #cd2323; /* Color del ícono */
     }
 
     .search-input1::placeholder {
@@ -298,6 +298,12 @@ body {
         margin: 10px;
     }
     
+    .search-btn i {
+        margin-right: 10px; /* Espacio entre el icono y el texto */
+        font-size: 16px; /* Tamaño del icono */
+    }
+        
+    
     /* Filtros */
     
 
@@ -307,7 +313,7 @@ body {
         border-radius: 10px; /* Bordes redondeados */
         border: 2px solid #ccc; /* Borde más grueso */
         font-size: 16px;
-        background-color: #fff; /* Fondo blanco */
+        background-color: #f8f6f6; /* Fondo blanco */
         box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
         transition: all 0.3s ease; /* Transición suave para efectos */
         cursor: pointer; /* Cambiar el cursor al pasar */
