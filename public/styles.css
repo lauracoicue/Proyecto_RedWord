@@ -1,0 +1,486 @@
+/* Estilos básicos */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f7f7f7;
+}
+
+/*--------------------------------*/
+@media (max-width: 768px) {
+
+    button {
+        margin: 10px;
+    }
+
+    #nav {
+        position: fixed; /* Fijo para que se superponga en la pantalla */
+        top: 50%; /* Centro vertical */
+        left: 50%; /* Centro horizontal */
+        transform: translate(-50%, -50%); /* Ajusta para centrar */
+        width: 300px; /* Ancho del rectángulo */
+        height: 500px; /* Altura del rectángulo */
+        background-color: red; /* Fondo rojo */
+        z-index: 1000; /* Valor alto para que se superponga sobre otros elementos */
+        display: none; /* Oculto por defecto */
+        color: white; /* Texto en blanco para contraste */
+        text-align: center; /* Centrar el texto */
+        padding: 20px; /* Espacio interno */
+        border-radius: 10px; /* Bordes redondeados */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        
+    }
+
+    #nav.visible {
+        display: flex; /* Muestra el menú cuando tiene la clase 'visible' */
+    }
+
+    .back-btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: transparent;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .buscador {
+        position: relative; /* Posición relativa para 'z-index' */
+        z-index: 0; /* Valor menor para estar debajo del menú */
+    }
+
+}
+/*----------------------------------------------------------------*/
+
+.logo img {
+    max-height: 60px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #b10707;
+}
+
+/* Menú móvil */
+#mobile-menu {
+    display: none;
+    cursor: pointer;
+}
+
+#menu {
+    display: none;
+    flex-direction: column;
+    gap: 1em;
+}   
+
+#menu.activate {
+    display: flex;
+}
+
+.nav-links {
+    display: flex;
+}
+
+@media (max-width: 769px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+    }
+    #mobile-menu {
+        display: block;
+    }
+}
+
+@media (min-width: 769px) {
+    #menu {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+/* Formulario de búsqueda */
+
+.search-section {
+    position: relative;
+    height: 350px; /* Ajusta según la altura que desees */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+    .search-section {
+        background-image: url('public/hero.jpg'); /* Asegúrate de que esta sea la ruta correcta de tu imagen */
+        background-size: cover;
+        background-position: center;
+    }
+
+    .search-form {
+        background-color: #f5f1f0; /* Fondo del formulario */
+        padding: 5px;
+        border-radius: 30px;
+        /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        z-index: 1;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+    .search-form2 {
+        background-color: #cf5c3f; /* Fondo del formulario */
+        padding: 0px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        z-index: 1;
+        border-top: 1px solid #ccc; /* Borde superior de 1px, color gris claro */
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+
+    /*cambios*/
+    .input-container {
+        position: flex;
+        display: inline-block; /* Asegura que los contenedores se alineen horizontalmente */
+        margin-right: 15px; /* Añade espacio entre los inputs */
+    }
+    
+    .input-container i {
+        position: absolute;
+        left: 10px; /* Posiciona el ícono dentro del campo */
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999;
+    }
+    
+    .search-input1,
+    .search-input2 {
+        padding-left: 40px; /* Asegura espacio suficiente para el ícono */
+        padding: 10px 15px;
+        border-radius: 30px;
+        border: none;
+        outline: none;
+        flex: 1;
+        font-size: 16px;
+        width: 200px;
+        position: relative;
+    }
+
+    .search-input1::placeholder {
+        padding-left: 10px;  /* Asegura que el placeholder también tenga espacio para el ícono */
+        color: #aaa; /* Color del placeholder */
+    }
+    .search-input2::placeholder {
+        padding-left: 10px;  /* Asegura que el placeholder también tenga espacio para el ícono */
+        color: #aaa; /* Color del placeholder */
+    }
+
+    .search-btn {
+        background-color: white;
+        color: #e74c3c;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    
+    /* Filtros */
+    .filter-options {
+        padding: 15px 20px;
+        border-radius: 30px;
+        border: none;
+        display: inline-block;
+    }
+
+    .filter-options select {
+        padding: 5px 10px; /* Más espacio alrededor */
+        border-radius: 20px; /* Bordes redondeados */
+        border: none; /* Borde más grueso */
+        font-size: 16px;
+        background-color: #fff; /* Fondo blanco */
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+        transition: all 0.3s ease; /* Transición suave para efectos */
+        cursor: pointer; /* Cambiar el cursor al pasar */
+        display: inline-block; /* Alinear el contenido horizontalmente */
+        gap: 50px; /* Espacio entre filtros */
+        padding: 10px 50px; /* Más espacio alrededor */
+    }
+
+    .filter-options select:hover {
+        background-color: #fafafa; /* Ligero cambio de fondo al pasar el ratón */
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+        background-color: #f7f7f7; /* Cambio de color de fondo */
+    }
+
+
+}
+
+
+
+/* Formulario de búsqueda para pantallas pequeñas (mobile) */
+@media (max-width: 768px) {
+    .contsearch {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        width: 100%;
+    }
+
+    .search-form, .search-form2 {
+        display: flex;
+        flex-direction: column; /* Alinea verticalmente los inputs */
+        align-items: center;
+        width: 100%;
+        gap: 15px; /* Espacio entre los campos */
+    }
+    .input-container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 300px; /* Limita el ancho en pantallas pequeñas */
+        padding: 10px;
+        background-color: #f7f7f7; /* Fondo suave */
+        border-radius: 10px; /* Bordes redondeados */
+        border: 1px solid #ccc;
+    }
+
+    .input-container i {
+        margin-right: 10px; /* Espacio entre el ícono y el input */
+        color: #333; /* Color del ícono */
+    }
+
+    .search-input1::placeholder {
+        padding-left: 10px;  /* Asegura que el placeholder también tenga espacio para el ícono */
+        color: #aaa; /* Color del placeholder */
+    }
+    .search-input2::placeholder {
+        padding-left: 10px;  /* Asegura que el placeholder también tenga espacio para el ícono */
+        color: #aaa; /* Color del placeholder */
+    }
+
+    .search-input1, .search-input2 {
+        border: none;
+        outline: none;
+        font-size: 16px;
+        width: 100%; /* Ocupa todo el espacio disponible */
+        background-color: transparent;
+    }
+    
+    .search-btn {
+        background-color: rgb(228, 14, 14);
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+        margin: 10px;
+    }
+    
+    /* Filtros */
+    
+
+    /* Limitar el tamaño en pantallas pequeñas */
+    .filter-options select {
+        padding: 10px 20px; /* Más espacio alrededor */
+        border-radius: 10px; /* Bordes redondeados */
+        border: 2px solid #ccc; /* Borde más grueso */
+        font-size: 16px;
+        background-color: #fff; /* Fondo blanco */
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+        transition: all 0.3s ease; /* Transición suave para efectos */
+        cursor: pointer; /* Cambiar el cursor al pasar */
+        display: flex; /* Alinear el contenido dentro de los filtros */
+        gap: 10px; /* Espacio entre filtros */
+    }
+
+    .filter-options select:hover {
+        background-color: #fafafa; /* Ligero cambio de fondo al pasar el ratón */
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+        background-color: #f7f7f7; /* Cambio de color de fondo */
+    }
+
+
+    .search-input1,
+    .search-input2, 
+    .filter-options, 
+    .search-btn {
+        width: 100%;
+        max-width: 300px; /* Limita el ancho para pantallas más pequeñas */
+    }
+    
+    .filter-options {
+        display: flex;
+        gap: 40px;
+        width: 200%;
+        margin: 10px;
+    }
+}
+
+
+
+/* Resultados */
+.results {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2em;
+    padding: 2em;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .results {
+        grid-template-columns: 1fr; /* Una sola columna para pantallas pequeñas */
+    }
+    
+    .result-item {
+        max-width: 100%; /* Las tarjetas ocupan todo el ancho en pantallas pequeñas */
+    }
+}
+
+/* Contenedor de la tarjeta de resultados */
+.result-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+    max-width: 600px; /* Ajusta esto para pantallas más grandes */
+    max-height: 300px; /* Ajusta esto para pantallas más grandes */
+}
+
+/* Contenido del texto */
+.text-content {
+    flex: 1; /* Esto asegura que el contenido de texto ocupe el espacio restante */
+    padding-right: 50px;  /*Espacio entre el texto y la imagen */
+    margin-bottom: 0;
+}
+
+/* Encabezado del nombre */
+h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Descripción */
+p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Calificación */
+.rating {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #e74c3c;
+}
+
+/* Botón de contactar */
+.contact-btn {
+    display: flex;
+    align-items: center;
+    background-color: #25D366; /* Color de WhatsApp */
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    gap: 0.5em;
+}
+
+.contact-btn i {
+    margin-right: 0.5em;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+/* Contenedor de la imagen para que esté alineada a la derecha */
+.image-content {
+    display: flex;
+    justify-content: flex-end; /* Asegura que la imagen esté alineada a la derecha */
+    
+}
+
+.image-content img {
+    max-width: 80px; /* Ajusta el tamaño si es necesario */
+    height: auto;
+    border-radius: 5px; /* Borde con esquinas ligeramente redondeadas */
+}
+
+/* Insignia de "Disponible" */
+.available-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #3498db;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.result-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-item img {
+    max-width: 100px;
+    border-radius: 0%;
+}
+
+.profile-info h3 {
+    margin: 0.5em 0;
+    color: #333;
+}

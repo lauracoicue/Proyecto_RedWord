@@ -1,9 +1,66 @@
----
+--- 
 import Layout from "../layouts/Layout.astro"
+
 ---
 
-<Layout title="Resultados">
-    <main>
-        <h1>Resultados</h1>
-    </main>
+<Layout title="RedWork - Página de Resultados">
+  <!-- Barra de navegación -->
+  <header>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+  </header>
+
+  <!-- Formulario de búsqueda -->
+  <section class="search-section">
+    <div class="contsearch">
+        <form class="search-form">
+        <div class="input-container">
+            <i class="fas fa-briefcase"></i>
+            <input type="text" placeholder="Servicio o categoría" class="search-input1">
+        </div>
+        <div class="input-container">
+            <i class="fas fa-map-marker-alt"></i>
+            <input type="text" placeholder="Ubicación" class="search-input2">
+        </div>
+        <button type="submit" class="search-btn">Buscar</button>
+        </form>
+        <form class="search-form2">
+        <div class="filter-options">
+            <select>
+            <option value="disponibilidad">Disponibilidad</option>
+            </select>
+            <select>
+            <option value="puntaje">Puntaje</option>
+            </select>
+        </div>
+        </form>
+    </div>
+  </section>
+
+
+  <!-- Resultados -->
+  <section class="results">
+    {Array(6).fill(0).map(() => (
+      <div class="result-item">
+        <div class="available-badge">Disponible</div>
+        <div class="result-content">
+          <div class="text-content">
+            <h3>Pedro Pablo Perez Pereira</h3>
+            <p>Soldador, Cerrajero, realizo todo tipo de trabajo con acero</p>
+            <div class="rating">
+              <span>⭐ 4.5 / 5.0</span>
+            </div>
+            <button class="contact-btn"><i class="fab fa-whatsapp" ></i> Contactar</button>
+          </div>
+          <div class="image-content">
+            <img src="public/imagen_trabajador.png" alt="Foto de Pedro Pablo Perez Pereira">
+          </div>
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" defer></script>
+  <script src="script.js" defer></script>
 </Layout>
