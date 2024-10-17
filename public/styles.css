@@ -158,7 +158,7 @@ body {
         border-bottom-right-radius: 0px;
     }
     .search-form2 {
-        background-color: #cf5c3f; /* Fondo del formulario */
+        background-color: rgb(218, 43, 43); /* Fondo del formulario */
         padding: 0px;
         display: flex;
         gap: 15px;
@@ -209,8 +209,8 @@ body {
     }
 
     .search-btn {
-        background-color: white;
-        color: #e74c3c;
+        background-color: rgb(218, 43, 43);
+        color: #ffffff;
         padding: 10px 20px;
         border: none;
         border-radius: 30px;
@@ -221,14 +221,16 @@ body {
     
     /* Filtros */
     .filter-options {
-        padding: 15px 20px;
+        padding: 15px 50px; /*20*/
         border-radius: 30px;
         border: none;
         display: inline-block;
+        gap: 10px; /* Aumenta el espacio entre los select */
+        justify-content: center; /* Centra los select en el contenedor */
     }
 
     .filter-options select {
-        padding: 5px 10px; /* Más espacio alrededor */
+        padding: 10px 30px; /* Más espacio alrededor */
         border-radius: 20px; /* Bordes redondeados */
         border: none; /* Borde más grueso */
         font-size: 16px;
@@ -237,8 +239,7 @@ body {
         transition: all 0.3s ease; /* Transición suave para efectos */
         cursor: pointer; /* Cambiar el cursor al pasar */
         display: inline-block; /* Alinear el contenido horizontalmente */
-        gap: 50px; /* Espacio entre filtros */
-        padding: 10px 50px; /* Más espacio alrededor */
+        /*gap: 10px; /* Espacio entre filtros */
     }
 
     .filter-options select:hover {
