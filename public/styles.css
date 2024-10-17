@@ -68,24 +68,6 @@ body {
 }
 /*----------------------------------------------------------------*/
 
-.logo img {
-    max-height: 60px;
-}
-
-.nav-links {
-    display: flex;
-    gap: 20px;
-}
-
-.nav-links li {
-    list-style: none;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #b10707;
-}
-
 /* Menú móvil */
 #mobile-menu {
     display: none;
@@ -131,8 +113,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
     overflow: hidden;
 }
 
@@ -144,9 +126,9 @@ body {
     }
 
     .search-form {
-        background-color: #f5f1f0; /* Fondo del formulario */
-        padding: 5px;
-        border-radius: 30px;
+        background-color: #ffffff; /* Fondo del formulario */
+        padding: 5px 20px;
+        border-radius: 25px;
         /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
         display: flex;
         gap: 15px;
@@ -159,9 +141,8 @@ body {
     }
     .search-form2 {
         background-color: rgb(218, 43, 43); /* Fondo del formulario */
-        padding: 0px;
+        padding: 10px 20px;
         display: flex;
-        gap: 15px;
         align-items: center;
         flex-wrap: wrap;
         justify-content: center;
@@ -183,14 +164,15 @@ body {
         left: 10px; /* Posiciona el ícono dentro del campo */
         top: 50%;
         transform: translateY(-50%);
-        color: #999;
+        color: #df1b1b;
+        z-index: 10;
     }
     
     .search-input1,
     .search-input2 {
-        padding-left: 40px; /* Asegura espacio suficiente para el ícono */
-        padding: 10px 15px;
-        border-radius: 30px;
+        padding-left: 10px; /* Asegura espacio suficiente para el ícono */
+        padding: 10px 20px;
+        border-radius: 25px;
         border: none;
         outline: none;
         flex: 1;
@@ -200,18 +182,18 @@ body {
     }
 
     .search-input1::placeholder {
-        padding-left: 10px;  /* Asegura que el placeholder también tenga espacio para el ícono */
+        /*padding-left: 10px;  /* Asegura que el placeholder también tenga espacio para el ícono */
         color: #aaa; /* Color del placeholder */
     }
     .search-input2::placeholder {
-        padding-left: 10px;  /* Asegura que el placeholder también tenga espacio para el ícono */
+        /*padding-left: 10px;  /* Asegura que el placeholder también tenga espacio para el ícono */
         color: #aaa; /* Color del placeholder */
     }
 
     .search-btn {
         background-color: rgb(218, 43, 43);
         color: #ffffff;
-        padding: 10px 20px;
+        padding: 10px 25px;
         border: none;
         border-radius: 30px;
         cursor: pointer;
@@ -230,7 +212,7 @@ body {
     }
 
     .filter-options select {
-        padding: 10px 30px; /* Más espacio alrededor */
+        padding: 10px 60px; /* Más espacio alrededor */
         border-radius: 20px; /* Bordes redondeados */
         border: none; /* Borde más grueso */
         font-size: 16px;
