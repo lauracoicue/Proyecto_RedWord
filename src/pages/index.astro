@@ -6,6 +6,7 @@ import Item from '../components/Item.astro';
 import CorazonSvg from '../svgs/CorazonSvg.astro';
 import MensajeSvg from '../svgs/MensajeSvg.astro';
 import RedSvg from '../svgs/RedSvg.astro';
+import NuevoBuscador from '../components/NuevoBuscador.astro';
 
 
 const infoItems = [
@@ -31,15 +32,15 @@ const infoItems = [
 
 <Layout title="RedWork">
 	<Buscador/>
-	<section class="md:hidden mx-auto"> 
-		<h3 class="text-center text-gray-600"> Hoy hay más de <b>50</b> trabajadores ofreciendo <br> sus servicios</h3>
+	<section class="mobile-view "> 
+		<h2 class="text-center text-gray-600 font-xs"> Hoy hay más de <b>50</b> trabajadores ofreciendo <br> sus servicios</h2>
 		<img src="/hero2.jpg" alt="" class="w-full h-full object-cover mobile-view">
 	</section>
-	<section class="md:hidden my-32 mx-auto flex flex-col items-center justify-center">
+	<section class="mobile-view my-32  flex flex-col items-center justify-center">
 		<h3 class="text-center">Si buscas ofertar tus servicios <br> ¡RedWork es tu mejor aliado!</h3>
-		<button class="bg-red-500 text-white py-2 w-2/3 rounded-full mt-10 ">Crea tu cuenta</button>
+		<button class="bg-red-600 text-white py-2 w-2/3 rounded-full mt-10 ">Crea tu cuenta</button>
 	</section>
-	<section  class="columns-2 justify-center items-center mobile-view md:hidden">
+	<section  class="columns-2 justify-center items-center mobile-view mobile-view">
 			<h2 class="text-center text-5xl"><b>+50</b></h2>
 			<h1 class="text-center text-gray-600">Trabajadores<br> activos</h1>
 		
@@ -93,7 +94,10 @@ const infoItems = [
 
 
 <style>
-    @media screen and (max-width: 768px) {    .desktop-view {
+    @media screen and (max-width: 1024px) {    .desktop-view {
             display: none;    }
     }
+	@media screen and (min-width: 1023px) {    .mobile-view {
+			display: none;    }
+	}
 </style>
