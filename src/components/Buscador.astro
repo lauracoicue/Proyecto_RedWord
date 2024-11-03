@@ -1,6 +1,6 @@
 ---
 const currentUrl = Astro.url.pathname;
-const shouldShowFilters = currentUrl.includes("/resultados");
+const shouldShowFilters = currentUrl.includes("/results");
 const searchFormClass = shouldShowFilters ? "search-form no-rounded-borders" : "search-form rounded-borders";
 ---
 
@@ -9,12 +9,12 @@ const searchFormClass = shouldShowFilters ? "search-form no-rounded-borders" : "
     <div class="contsearch">
         <form class={searchFormClass}>
         <div class="input-container">
-            <i class="fas fa-briefcase"></i>
-            <input type="text" placeholder="Servicio o categoría" class="search-input1">
+            <i class="fas fa-briefcase text-red-700"></i>
+            <input type="text" placeholder="Servicio o categoría" class="search-input1 mx-3">
         </div>
         <div class="input-container">
-            <i class="fas fa-map-marker-alt"></i>
-            <input type="text" placeholder="Ubicación" class="search-input2">
+            <i class="fas fa-map-marker-alt text-red-700"></i>
+            <input type="text" placeholder="Ubicación" class="search-input2 mx-3">
         </div>
         <button type="submit" class="search-btn"><i class="fas fa-search"></i> Buscar</button>
         </form>
@@ -273,7 +273,7 @@ body {
     }
 
     .search-form.no-rounded-borders {
-    border-radius: 0;
+    border-radius: 25;
     }
 
 
@@ -282,7 +282,7 @@ body {
 
 
 /* Formulario de búsqueda para pantallas pequeñas (mobile) */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .contsearch {
         display: flex;
         flex-direction: column;
@@ -300,7 +300,7 @@ body {
         gap: 15px; /* Espacio entre los campos */
     }
     .input-container {
-        display: flex;
+        display: flex; 
         align-items: center;
         width: 100%;
         max-width: 300px; /* Limita el ancho en pantallas pequeñas */
@@ -311,16 +311,18 @@ body {
     }
 
     .input-container i {
-        margin-right: 10px; /* Espacio entre el ícono y el input */
+        position: absolute;
+        left: 15px; /* Posiciona el ícono dentro del campo */
+        /*margin-right: 15px; /* Espacio entre el ícono y el input */
         color: #cd2323; /* Color del ícono */
     }
 
     .search-input1::placeholder {
-        padding-left: 10px;  /* Asegura que el placeholder también tenga espacio para el ícono */
+        padding-left: 1px;  /* Asegura que el placeholder también tenga espacio para el ícono */
         color: #aaa; /* Color del placeholder */
     }
     .search-input2::placeholder {
-        padding-left: 10px;  /* Asegura que el placeholder también tenga espacio para el ícono */
+        padding-left: 1px;  /* Asegura que el placeholder también tenga espacio para el ícono */
         color: #aaa; /* Color del placeholder */
     }
 
@@ -330,6 +332,7 @@ body {
         font-size: 16px;
         width: 100%; /* Ocupa todo el espacio disponible */
         background-color: transparent;
+        padding-left: 20px;
     }
     
     .search-btn {
