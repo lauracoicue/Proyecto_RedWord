@@ -50,7 +50,7 @@ body {
     }
 
     .back-btn {
-        position: absolute;
+        position: fixed;
         top: 10px;
         left: 10px;
         background-color: transparent;
@@ -58,6 +58,7 @@ body {
         color: white;
         font-size: 24px;
         cursor: pointer;
+        z-index: 1100;
     }
 
     .buscador {
