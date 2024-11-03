@@ -121,7 +121,7 @@ body {
 
 @media (min-width: 1024px) {
     .search-section {
-        background-image: url('public/hero.jpg'); /* Asegúrate de que esta sea la ruta correcta de tu imagen */
+        background-image: url('/hero.jpg'); /* Asegúrate de que esta sea la ruta correcta de tu imagen */
         background-size: cover;
         background-position: center;
     }
