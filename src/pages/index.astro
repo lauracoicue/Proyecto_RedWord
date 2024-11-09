@@ -32,7 +32,7 @@ const infoItems = [
 
 <Layout title="RedWork">
 	<Buscador/>
-	<section class="mobile-view "> 
+	<section class="mobile-view"> 
 		<h2 class="text-center text-gray-600 font-xs"> Hoy hay más de <b>50</b> trabajadores ofreciendo <br> sus servicios</h2>
 		<img src="/hero2.jpg" alt="" class="w-full h-full object-cover mobile-view">
 	</section>
@@ -49,12 +49,12 @@ const infoItems = [
 
 	</section>
     <section class=" my-24 container mx-auto desktop-view">        
-		<header class="mx-auto">
+		<header class="mx-36">
             <h1 class="text-center font-bold text-lg">Si buscas ofrecer tus servicios o encontrar excelentes trabajadores <br> ¡RedWord es tu mejor opción!</h1>
             <h3 class="text-gray-700 text-center my-4">Ayudando a miles de trabajadores informales</h3>        
 		</header>
-        <main class="columns-2 mt-8 flex justify-center items-center py-4">            
-			<div class="mx-auto my-auto">
+        <main class="columns-2 mt-8 flex justify-center items-center py-20">            
+			<div class="mx-10 my-auto">
             	<img class="" src="/imagen_trabajador.png"  alt="Imagen de un trabajador con un cliente">
             </div>
             <div class="flex flex-col items-center">                    
@@ -74,9 +74,9 @@ const infoItems = [
             </div>
         </main>    
 	</section>
-    <section class="desktop-view my-3 container mx-auto">
-        <div class="text-center py-20">            
-			<h1 class="font-bold">Encuentra a tu próximo trabajador de confianza</h1>
+    <section class="desktop-view -mt-16 container mx-auto">
+        <div class="text-center py-5">            
+			<h1 class="font-bold py-12">Encuentra a tu próximo trabajador de confianza</h1>
         </div>       
 		<div class="flex">
 			{infoItems.map((item) => (
@@ -86,7 +86,7 @@ const infoItems = [
 			))}
 		</div> 
 		
-        <div class="text-center py-24">
+        <div class="text-center py-20">
 			<Boton texto='Buscar' link='#buscador' />
         </div>   
 	</section>
