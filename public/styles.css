@@ -17,57 +17,6 @@ body {
     background-color: #f7f7f7;
 }
 
-/*--------------------------------*/
-@media (max-width: 768px) {
-
-    button {
-        margin: 10px;
-    }
-
-    #nav {
-        position: fixed; /* Fijo para que se superponga en la pantalla */
-        top: 50%; /* Centro vertical */
-        left: 50%; /* Centro horizontal */
-        transform: translate(-50%, -50%); /* Ajusta para centrar */
-        width: 300px; /* Ancho del rectángulo */
-        height: 500px; /* Altura del rectángulo */
-        background-color: red; /* Fondo rojo */
-        z-index: 1000; /* Valor alto para que se superponga sobre otros elementos */
-        display: none; /* Oculto por defecto */
-        color: white; /* Texto en blanco para contraste */
-        text-align: center; /* Centrar el texto */
-        padding: 20px; /* Espacio interno */
-        border-radius: 10px; /* Bordes redondeados */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        
-    }
-
-    #nav.visible {
-        display: flex; /* Muestra el menú cuando tiene la clase 'visible' */
-    }
-
-    .back-btn {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        background-color: transparent;
-        border: none;
-        color: white;
-        font-size: 24px;
-        cursor: pointer;
-        z-index: 1100;
-    }
-
-    .buscador {
-        position: relative; /* Posición relativa para 'z-index' */
-        z-index: 0; /* Valor menor para estar debajo del menú */
-    }
-
-}
-/*----------------------------------------------------------------*/
 
 /* Menú móvil */
 #mobile-menu {

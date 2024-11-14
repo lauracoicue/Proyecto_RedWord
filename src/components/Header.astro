@@ -1,6 +1,10 @@
 ---
 console.log ("javascript")
 import results from "../pages/results.astro";
+import SobreNosotros from "../pages/SobreNosotros.astro";
+import Politicas from "../pages/Politicas.astro";
+import Terminos from "../pages/Terminos.astro";
+import Manual from "../pages/Manual.astro";
 ---
 
 <header class="header whapper py-1 lg:flex lg:justify-between lg:items-center">
@@ -18,22 +22,22 @@ import results from "../pages/results.astro";
         <ul class="menu bg-secondary-100 [&>li]:mx-4 lg:flex justify-center text-center ">
             <li class="item-menu group">
                 <div class="Conoce-default">
-                    <a class="text-red-500" href="#">Sobre nosotros</a>
+                    <a class="text-red-500" href="http://localhost:4321/SobreNosotros">Sobre nosotros</a>
                 </div>
             </li>
             <li class="item-menu group">
                 <div class="Terminos-default">
-                    <a class="text-red-500" href="#">Terminos y condiciones</a>
+                    <a class="text-red-500" href="http://localhost:4321/Terminos">Terminos y condiciones</a>
                 </div>
             </li>
             <li class="item-menu group">
                 <div class="button Politica-default"> 
-                    <a class="text-red-500" href="#">Politica de privacidad</a>
+                    <a class="text-red-500" href="http://localhost:4321/Politicas">Politica de privacidad</a>
                 </div>
             </li>
             <li class="item-menu group">
                 <div class="button Manual-default">
-                    <a class="text-red-500" href="#Primer link">Manual de usuario</a>
+                    <a class="text-red-500" href="http://localhost:4321/Manual">Manual de usuario</a>
                 </div>
             </li>
         </ul>
@@ -75,26 +79,59 @@ import results from "../pages/results.astro";
     float: right;;
     transform: rotate(90deg);
 }
-@media screen and (max-width: 1024px) {
-    
+
+@media (max-width: 1024px) {
+
+    button {
+        margin: 10px;
+    }
     .abrir-menu, 
     .cerrar-menu{
         display:block;
     }
-    .nav{
-        opacity: 0;
-        visibility: hidden;
+
+    .nav {
+        position: absolute; /* Fijo para que se superponga en la pantalla */
+        opacity: 0; /* Oculto por defecto */
+        top: 50%; /* Centro vertical */
+        left: 50%; /* Centro horizontal */
+        transform: translate(-50%, -50%); /* Ajusta para centrar */
+        width: 300px; /* Ancho del rectángulo */
+        height: 500px; /* Altura del rectángulo */
+        background-color: red; /* Fondo rojo */
+        z-index: 1000; /* Valor alto para que se superponga sobre otros elementos */
+        display: flex; /* Oculto por defecto */
+        color: white; /* Texto en blanco para contraste */
+        text-align: center; /* Centrar el texto */
+        padding: 20px; /* Espacio interno */
+        border-radius: 10px; /* Bordes redondeados */
         display: flex;
+        align-items: center;
+        justify-content: center;
         flex-direction: column;
-        align-items: end;
-        gap: 1rem;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgb(182, 66, 66) ;
-        padding: 2rem;
-        box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+        visibility: hidden;
+        
+    }
+
+    .nav.visible {
+        display: flex; /* Muestra el menú cuando tiene la clase 'visible' */
+    }
+
+    .back-btn {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background-color: transparent;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 1100;
+    }
+
+    .buscador {
+        position: relative; /* Posición relativa para 'z-index' */
+        z-index: 0; /* Valor menor para estar debajo del menú */
     }
     .nav.visible{
         opacity: 1;
@@ -110,6 +147,7 @@ import results from "../pages/results.astro";
 
 }
 </style>
+
 <script>
     const nav = document.querySelector("#nav");
     const abrir = document.querySelector("#abrir");
@@ -131,9 +169,9 @@ import results from "../pages/results.astro";
             element.classList.remove("-z-10");
         });
     });
-}
-    
+}  
 </script>
+
  
   
   

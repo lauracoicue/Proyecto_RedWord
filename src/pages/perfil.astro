@@ -1,6 +1,8 @@
 ---
 import Layouts from '../layouts/Layout.astro';
 import Buscador from '../components/Buscador.astro';
+import Trabajos_Realizados from '../components/Trabajos_Realizados.astro';
+import Puntuacion from '../components/Puntuacion.astro';
 
 ---
 
@@ -10,7 +12,7 @@ import Buscador from '../components/Buscador.astro';
                 <img src="usuario.png" alt="Imagen del trabajador" width="150" class="-mx-14">
                 <div class="flex flex-col p-8">
                     <h2 class="font-bold text-sm/3 text-gray-600 -mx-20">Pedro Pablo Perez Pereira</h2>
-                    <h3 class=" text-gray-700 my-2 text-xs -mx-20">Soldador, Cerrajero, realizo todo tipo de trabajo con acero </h3>
+                    <h3 class=" text-gray-700 my-2 text-3xs -mx-20">Soldador, Cerrajero, realizo todo tipo de trabajo con acero </h3>
                     <div class="-mx-20 text-xs flex-col">
                         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve" class="size-3 absolute">
                             <g>
@@ -34,144 +36,14 @@ import Buscador from '../components/Buscador.astro';
                 </svg>
                 <h1 class="mx-10">Contactar</h1></button>
         </div> 
-        <section class="md:hidden my-10">
-            <h2 class="my-14 mx-11 text-1sm text-gray-600 font-bold">Mis trabajos</h2>
-            <div class="my-9 m-4 mx-11 scrolling-container flex flex-nowrap overflow-x-auto space-x-3">
-                <div class="flex-none border rounded-3xl border-gray-200 bg-gray-200  w-48 h-48 text-center"><h2>Mi trabajo</h2></div>
-                <div class="flex-none border rounded-3xl border-gray-200 bg-gray-200  w-48 h-48 text-center"><h2>Mi trabajo</h2></div>
-                <div class="flex-none border rounded-3xl border-gray-200 bg-gray-200  w-48 h-48 text-center"><h2>Mi trabajo</h2></div>
-                <div class="flex-none border rounded-3xl border-gray-200 bg-gray-200  w-48 h-48 text-center"><h2>Mi trabajo</h2></div>
-                <div class="flex-none border rounded-3xl border-gray-200 bg-gray-200  w-48 h-48 text-center"><h2>Mi trabajo</h2></div>
-                <div class="flex-none border rounded-3xl border-gray-200 bg-gray-200  w-48 h-48 text-center"><h2>Mi trabajo</h2></div>
-                <div class="flex-none border rounded-3xl border-gray-200 bg-gray-200  w-48 h-48 text-center"><h2>Mi trabajo</h2></div>
-                <div class="flex-none border rounded-3xl border-gray-200 bg-gray-200  w-48 h-48 text-center"><h2>Mi trabajo</h2></div>
-                <div class="flex-none border rounded-3xl border-gray-200 bg-gray-200  w-48 h-48 text-center"><h2>Mi trabajo</h2></div>
-                <div class="flex-none border rounded-3xl border-gray-200 bg-gray-200  w-48 h-48 text-center"><h2>Mi trabajo</h2></div>
-                <div class="flex-none border rounded-3xl border-gray-200 bg-gray-200  w-48 h-48 text-center"><h2>Mi trabajo</h2></div>
-                <div class="flex-none border rounded-3xl border-gray-200 bg-gray-200  w-48 h-48 text-center"><h2>Mi trabajo</h2></div>
-            </div>
-            <h2 class="mx-11 py-2 font-bold text-gray-600 text-1sm">Reseñas</h2>
-        </section>
-        <section class="star flex mx-11 justify-between md:hidden">
-            <div class="felx flex-col ">
-                <h2 class=" text-gray-600">Laura Tatiana
-                    <h3 class=" text-gray-600 "> 8 de noviembre de 2024</h2>  
-            </div>
-            <div class="flex space-x-1 items-start mx-4 transition-colors duration-300 cursor-pointer">
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star text-gray-400 hover:text-red-700 transition-colors duration-200" viewBox="0 0 16 16">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                      </svg>
-                </div>
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star text-gray-400 hover:text-red-700 transition-colors duration-200" viewBox="0 0 16 16">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                    </svg>
-                </div>
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star text-gray-400 hover:text-red-700 transition-colors duration-200" viewBox="0 0 16 16">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                    </svg>
-                </div>
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star text-gray-400 hover:text-red-700 transition-colors duration-200" viewBox="0 0 16 16">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                    </svg>
-                </div>
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star text-gray-400 hover:text-red-700 transition-colors duration-200" viewBox="0 0 16 16">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                    </svg>
-                </div>
-            </div>
-        </section>
-        <section class="star flex mx-11 my-2 justify-between md:hidden">
-            <div class="felx flex-col ">
-                <h2 class=" text-gray-600">Laura Tatiana
-                    <h3 class=" text-gray-600 "> 8 de noviembre de 2024</h2>  
-            </div>
-            <div class="flex space-x-1 items-start mx-4 transition-colors duration-300 cursor-pointer">
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star text-gray-400 hover:text-red-700 transition-colors duration-200" viewBox="0 0 16 16">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                      </svg>
-                </div>
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star text-gray-400 hover:text-red-700 transition-colors duration-200" viewBox="0 0 16 16">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                    </svg>
-                </div>
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star text-gray-400 hover:text-red-700 transition-colors duration-200" viewBox="0 0 16 16">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                    </svg>
-                </div>
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star text-gray-400 hover:text-red-700 transition-colors duration-200" viewBox="0 0 16 16">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                    </svg>
-                </div>
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star text-gray-400 hover:text-red-700 transition-colors duration-200" viewBox="0 0 16 16">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                    </svg>
-                </div>
-            </div>
-        </section>
-        <section class="star flex mx-11 my-2 justify-between md:hidden">
-            <div class="felx flex-col ">
-                <h2 class=" text-gray-600">Laura Tatiana
-                    <h3 class=" text-gray-600 "> 8 de noviembre de 2024</h2>  
-            </div>
-            <div class="flex space-x-1 items-start mx-4 transition-colors duration-300 cursor-pointer">
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star text-gray-400 hover:text-red-700 transition-colors duration-200" viewBox="0 0 16 16">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                      </svg>
-                </div>
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star text-gray-400 hover:text-red-700 transition-colors duration-200" viewBox="0 0 16 16">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                    </svg>
-                </div>
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star text-gray-400 hover:text-red-700 transition-colors duration-200" viewBox="0 0 16 16">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                    </svg>
-                </div>
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star text-gray-400 hover:text-red-700 transition-colors duration-200" viewBox="0 0 16 16">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                    </svg>
-                </div>
-                <div class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill star text-gray-400 hover:text-red-700 transition-colors duration-200" viewBox="0 0 16 16">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                    </svg>
-                </div>
-            </div>
-        </section>
-<style>
-    @layer{
-        .scrolling-container::-webkit-scrollbar {
-          display: none;
-        }
-      }
-    .checked{
-        @apply text-red-500;
-    }
-</style>
-<script>
-    const stars = document.querySelectorAll('.star');
+        <Trabajos_Realizados/>
+        <Puntuacion/>
+        <Puntuacion/>
+        <Puntuacion/>
+        <Puntuacion/>
+        <Puntuacion/>
+        
 
-    stars.forEach(function(star, index){
-        star.addEventListener('click', function(){
-            for(let i = 0; i <= index; i++){
-                stars[i].classList.add('checked');
-            }
-        });
-    });
-</script>
     
 
     

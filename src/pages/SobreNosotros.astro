@@ -1,0 +1,10 @@
+---
+const currentUrl = Astro.url.pathname;
+const shouldShowFilters = currentUrl.includes("/results");
+const searchFormClass = shouldShowFilters ? "search-form no-rounded-borders" : "search-form rounded-borders";
+---
+
+<!-- Formulario de búsqueda -->
+<section class="container bg-red-600 text-center">
+    <h1>Hello desde la pagina sobre nosotros</h1>
+<style> 
