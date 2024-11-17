@@ -1,10 +1,23 @@
 ---
-const currentUrl = Astro.url.pathname;
-const shouldShowFilters = currentUrl.includes("/results");
-const searchFormClass = shouldShowFilters ? "search-form no-rounded-borders" : "search-form rounded-borders";
+import Layout from "../layouts/Layout.astro"
 ---
 
-<!-- Formulario de búsqueda -->
-<section class="container bg-red-600 text-center">
-    <h1>Hello desde la pagina sobre nosotros</h1>
-<style> 
+<Layout title="SobreNosotros">
+    <main class="container justify-center mx-auto">
+        <h1 class="text-center font-bold text-5xl mt-14">Sobre Nosotros</h1>
+        <div class="justify-center mx-64 mt-28">
+            <h2 class="mb-16 text-2xl"> En RedWork nos preocupamos por aquellas personas que ofrecen sus servicios en el ámbito informal. 
+                Nuestra creación fue en 2024 ya que las plataformas de empleo existentes están enfocadas principalmente en trabajos formales. 
+                Buscamos simplificar el proceso de conexión entre clientes y trabajadores, integrando la plataforma con WhatsAp. Queremos que en un 
+                futuro la plataforma pueda expandirse para incluir otros canales de interacción, como una aplicación móvil o una versión más robusta del portal web.</h2>
+            <h2 class="mb-16 text-2xl"> Quisimos desarrollar una plataforma web ya que permite tener una mayor accesibilidad, esto debido a que al ser una plataforma digital, 
+                cualquier persona con acceso a internet podrá utilizarla desde cualquier dispositivo, sin importar donde se encuentre. De igual forma, se pensó en el redireccionamiento 
+                a WhatsApp en algunas de las funcionalidades, aprovechando su facilidad y practicidad, asegurando así que nuestros usuarios tengan una agradable experiencia y logren 
+                establecer conexiones exitosas con sus posibles clientes. Además, el desarrollo web permite una rápida escalabilidad y adaptación, lo que garantiza que la plataforma pueda crecer 
+                y evolucionar conforme a las nuevas necesidades del mercado.</h2>
+            <h2 class="mb-16 text-2xl">Nuestro equipo está compuesto por expertos en diversas áreas de la tecnología, aportando grandes conocimientos que llevan nuestra 
+                plataforma a otro nivel. En RedWork, tenemos como valores principales el trabajo en equipo y la comunicación asertiva. Creemos fielmente que el éxito de nuestros 
+                proyectos radica en la dedicación y el talento de cada miembro de nuestro equipo, quienes se esfuerzan cada día por superar las expectativas de nuestros clientes y usuarios.</h2>
+        </div>
+    </main>
+</Layouts>
