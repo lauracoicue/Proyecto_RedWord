@@ -3,21 +3,22 @@ const currentUrl = Astro.url.pathname;
 const shouldShowFilters = currentUrl.includes("/results");
 const searchFormClass = shouldShowFilters ? "search-form no-rounded-borders" : "search-form rounded-borders";
 ---
-
 <!-- Formulario de búsqueda -->
 <section class="search-section">
     <div class="contsearch">
         <form class={searchFormClass}>
-        <div class="input-container">
+        <div class="input-container" >
             <i class="fas fa-briefcase text-red-500"></i>
-            <input type="text" placeholder="Servicio o categoría" class="search-input1 mx-3">
+            <input type="text" placeholder="Servicio o categoría" class="search-input1 mx-3" onclick="toggleOverlay(true)">
         </div>
-        <div class="input-container">
+        <div class="input-container" >
             <i class="fas fa-map-marker-alt text-red-500"></i>
-            <input type="text" placeholder="Ubicación" class="search-input2 mx-3">
+            <input type="text" placeholder="Ubicación" class="search-input2 mx-3" onclick="toggleOverlay(true)">
         </div>
-        <button type="submit" class="search-btn"><i class="fas fa-search"></i> Buscar</button>
+        <button type="submit" class="search-btn">
+            <i class="fas fa-search"></i> Buscar</button>
         </form>
+
 
         {shouldShowFilters && (
         <form class="search-form2">
@@ -31,16 +32,46 @@ const searchFormClass = shouldShowFilters ? "search-form no-rounded-borders" : "
             </div>
         </form>
         )}
-    </div>
+        <!-- Ventana superpuesta servicio categoría-->
+        <div id="overlay" class="overlay hidden">
+            <button class="back-btn" onclick="toggleOverlay(false)">Volver</button>
+            <div class="Search-bar">
+                <input type="text" placeholder="Servicio o categoría" class="search-inputhi mx-3">
+                <h2 class="text-xl text-black text-center uppercase tracking-wide my-4 border-b-2 border-gray-300 pb-2">Búsquedas mas populares</h2> 
+                <ul class="most-searched"> 
+                    <li>Soldador</li>
+                    <li>Carpintero</li>
+                    <li>Jardinero</li>
+                    <li>Albañil</li>
+                    <li>Limpieza</li>
+                </ul>
+            </div>
+        </div>
+         <!-- Ventana superpuesta ubicación-->
+         <div id="overlay2" class="overlay hidden">
+            <button class="back-btn2" onclick="toggleOverlay(false)">Volver</button>
+            <div class="Search-bar2">
+                <input type="text" placeholder="Ubicación" class="search-inputhi2 mx-3">
+                <h2 class="text-xl text-black text-center uppercase tracking-wide my-4 border-b-2 border-gray-300 pb-2">Búsquedas mas populares</h2> 
+                <ul class="most-searched2"> 
+                    <li>Roldanillo</li>
+                    <li>Cali</li>
+                    <li>Calima</li>
+                    <li>Tuluá</li>
+                    <li>Buga</li>
+                </ul>
+            </div>
+        </div>
   </section>
 
 <style> 
 
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: Arial, sans-serif;
 }
 
 body {
@@ -54,7 +85,7 @@ body {
 }
 
 /*--------------------------------*/
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
 
     button {
         margin: 10px;
@@ -296,7 +327,7 @@ body {
 
 
 /* Formulario de búsqueda para pantallas pequeñas (mobile) */
-@media (max-width: 1000px) {
+@media (max-width: 1023px) {
     .contsearch {
         display: flex;
         flex-direction: column;
@@ -405,5 +436,296 @@ body {
         width: 200%;
         margin: 10px;
     }
+
+/*Ventana emergente servicio categoría*/
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 100px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Para manejar contenido largo */
 }
+
+.overlay.hidden {
+    display: none;
+}
+
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border-radius: 50%;
+    color: #cd0c0c;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.back-btn:hover {
+    transform: scale(1.1); /* Pequeño efecto de zoom */
+}
+
+.overlay-content {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: #333333;
+    width: 90%;
+    max-width: 600px;
+    width: 100%;
+}
+
+/* Barra de búsqueda */
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    gap: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 60px;
+    max-width: 400px;
+}
+
+.search-inputhi {
+    flex: 1;
+    border: 2px solid #e0e0e0; /* Borde claro y moderno */
+    outline: none; /* Elimina el borde adicional al seleccionar */
+    font-size: 1rem;
+    padding: 12px 16px; /* Más espacio interno para un diseño cómodo */
+    border-radius: 10px; /* Bordes muy redondeados para un estilo más atractivo */
+    background: #ffffff; /* Fondo claro y suave */
+    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.08); /* Sombra interna sutil */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Efecto suave al interactuar */
+    color: #363636; /* Color del texto */
+}
+
+.search-inputhi::placeholder {
+    color: #999999; /* Color del placeholder más suave */
+    font-style: italic; /* Estilo diferenciado para el placeholder */
+}
+
+.search-inputhi:focus {
+    border-color: #aea5a5; /* Color del borde en el enfoque */
+    box-shadow: 0px 0px 8px rgba(190, 185, 185, 0.5); /* Efecto de brillo en el enfoque */
+    background: #ffffff; /* Aclara el fondo para mayor contraste */
+}
+
+
+/* Lista de búsquedas más populares */
+.most-searched {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+}
+
+.most-searched li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    background: #ffffff;
+    margin-bottom: 10px;
+    color: #555555;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.most-searched li:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px); /* Efecto de elevación */
+}
+
+.most-searched li:last-child {
+    margin-bottom: 0;
+}
+
+
+
+/*Ventana emergente ubicación*/
+
+/* Ventana emergente ubicación */
+.overlay2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 100px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Para manejar contenido largo */
+}
+
+.overlay2.hidden {
+    display: none;
+}
+
+.back-btn2 {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border-radius: 50%;
+    color: #cd0c0c;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.back-btn2:hover {
+    transform: scale(1.1); /* Pequeño efecto de zoom */
+}
+
+.overlay-content2 {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: #333333;
+    width: 90%;
+    max-width: 600px;
+    width: 100%;
+}
+
+/* Barra de búsqueda */
+.search-bar2 {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    gap: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 60px;
+    max-width: 400px;
+}
+
+.search-inputhi2 {
+    flex: 1;
+    border: 2px solid #e0e0e0; /* Borde claro y moderno */
+    outline: none; /* Elimina el borde adicional al seleccionar */
+    font-size: 1rem;
+    padding: 12px 16px; /* Más espacio interno para un diseño cómodo */
+    border-radius: 10px; /* Bordes muy redondeados para un estilo más atractivo */
+    background: #ffffff; /* Fondo claro y suave */
+    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.08); /* Sombra interna sutil */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Efecto suave al interactuar */
+    color: #363636; /* Color del texto */
+}
+
+.search-inputhi2::placeholder {
+    color: #999999; /* Color del placeholder más suave */
+    font-style: italic; /* Estilo diferenciado para el placeholder */
+}
+
+.search-inputhi2:focus {
+    border-color: #aea5a5; /* Color del borde en el enfoque */
+    box-shadow: 0px 0px 8px rgba(190, 185, 185, 0.5); /* Efecto de brillo en el enfoque */
+    background: #ffffff; /* Aclara el fondo para mayor contraste */
+}
+
+
+/* Lista de búsquedas más populares */
+.most-searched2 {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+}
+
+.most-searched2 li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    background: #ffffff;
+    margin-bottom: 10px;
+    color: #555555;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.most-searched2 li:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px); /* Efecto de elevación */
+}
+
+.most-searched2 li:last-child {
+    margin-bottom: 0;
+}
+
+
+}
+
 </style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const searchInput = document.querySelector(".search-input1");
+        const searchInput2 = document.querySelector(".search-input2");
+        const overlay = document.getElementById("overlay");
+        const overlay2 = document.getElementById("overlay2");
+        const backButton = document.querySelector(".back-btn");
+        const backButton2 = document.querySelector(".back-btn2");
+
+        if (searchInput && overlay && backButton) {
+            searchInput.addEventListener("click", () => {
+                overlay.classList.remove("hidden");
+            });
+
+            backButton.addEventListener("click", () => {
+                overlay.classList.add("hidden");
+            });
+        }
+        if (searchInput2 && overlay2 && backButton2) {
+            searchInput2.addEventListener("click", () => {
+                overlay2.classList.remove("hidden");
+            });
+
+            backButton2.addEventListener("click", () => {
+                overlay2.classList.add("hidden");
+            });
+        }
+    });
+</script>
+
