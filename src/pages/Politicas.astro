@@ -4,8 +4,8 @@ import Layout from "../layouts/Layout.astro"
 
 <Layout title="Politicas">
     <main class="container justify-center mx-auto">
-        <h1 class="text-center font-bold text-5xl mt-14">Política de Privacidad de RedWork</h1>
-        <div class="justify-center mx-64 mt-28">
+        <h1 class="text-center font-bold text-5xl mt-14 desktop-view">Política de Privacidad de RedWork</h1>
+        <div class="justify-center mx-64 mt-28 desktop-view">
             <h2 class="mb-3 text-3xl"> <b>1. Introducción</b></h2>
             <p class="mb-10 text-xl text-black">En RedWork Inc. valoramos tu privacidad y nos comprometemos a proteger la información personal que compartes con nosotros. 
                 Esta Política de Privacidad describe cómo recopilamos, usamos, almacenamos y protegemos tus datos personales al utilizar la aplicación RedWork.</p>
@@ -29,5 +29,38 @@ import Layout from "../layouts/Layout.astro"
             <h2 class="mb-3 text-3xl"><b>9. Contacto</b></h2>
             <p class="mb-10 text-xl text-black">9.1. 10.1. Si tienes preguntas o inquietudes sobre esta Política de Privacidad o sobre el manejo de tu información personal, por favor contacta a RedWork Inc.</p>
         </div>
+        <h1 class="text-center font-bold text-2xl mt-14 mobile-view mb-10">Política de Privacidad de RedWork</h1>
+        <div class="justify-cente mx-12 mobile-view">
+            <h2 class="mb-3 text-lg"> <b>1. Introducción</b></h2>
+            <p class="mb-10 text-lg text-black">En RedWork Inc. valoramos tu privacidad y nos comprometemos a proteger la información personal que compartes con nosotros. 
+                Esta Política de Privacidad describe cómo recopilamos, usamos, almacenamos y protegemos tus datos personales al utilizar la aplicación RedWork.</p>
+            <h2 class="mb-3 text-lg"> <b>2. Información que Recopilamos</b></h2>
+            <p class="mb-10 text-lg text-black">2.1. <b> Información de Registro:</b> Recopilamos información personal cuando te registras en la aplicación, como tu nombre, dirección de correo electrónico y contraseña.</p>
+            <p class="mb-10 -mt-5 text-lg text-black">2.2. <b> Datos de Uso: </b> Recopilamos información sobre cómo utilizas la aplicación, incluyendo interacciones con las funciones de la aplicación, tiempo de uso y preferencias.</p>
+            <h2 class="mb-3 text-lg"><b>3. Uso de la Información Recopilada</b></h2>
+            <p class="mb-10 text-lg text-black">3.1. Utilizamos la información recopilada para proporcionar, operar y mejorar la aplicación RedWork.</p>
+            <h2 class="mb-3 text-lg"><b>4. Protección de la Información</b></h2>
+            <p class="mb-10 text-lg text-black">4.1. Implementamos medidas de seguridad técnicas y organizativas para proteger tus datos personales contra accesos no autorizados, pérdida, alteración o divulgación, en conformidad con la Ley Estatutaria 1581 de 2012 de Protección de Datos Personales de Colombia.</p>
+            <p class="mb-10 -mt-5 text-lg text-black">4.2. Aunque tomamos medidas razonables para proteger tu información, no podemos garantizar la seguridad absoluta de los datos transmitidos a través de internet o almacenados en nuestros sistemas.</p>
+            <h2 class="mb-3 text-lg"><b>5. Compartir Información con Terceros</b></h2>
+            <p class="mb-10 text-lg text-black">5.1. RedWork Inc. no comparte información personal con terceros sin tu consentimiento, salvo en los casos necesarios para cumplir con la ley, responder a procesos legales, o proteger los derechos y seguridad de RedWork Inc., nuestros usuarios y el público.</p>
+            <h2 class="mb-3 text-lg"><b>6. Retención de Datos</b></h2>
+            <p class="mb-10 text-lg text-black">6.1. Conservamos tu información personal durante el tiempo necesario para cumplir con los propósitos descritos en esta Política de Privacidad, a menos que la ley exija o permita un período de retención más largo.</p>
+            <h2 class="mb-3 text-lg"><b>7. Derechos del Usuario</b></h2>
+            <p class="mb-10 text-lg text-black">7.1. Tienes derecho a acceder, corregir, actualizar o eliminar tu información personal. Puedes ejercer estos derechos a través de la configuración de tu cuenta en la aplicación.</p>
+            <p class="mb-10 -mt-5 text-lg text-black">7.2. Tienes derecho a retirar tu consentimiento para el procesamiento de tus datos personales en cualquier momento, sin afectar la legalidad del procesamiento basado en el consentimiento previo a su retiro.</p>
+            <h2 class="mb-3 text-lg"><b>8. Cambios a esta Política de Privacidad</b></h2>
+            <p class="mb-10 text-lg text-black">8.1. RedWork Inc. se reserva el derecho de actualizar esta Política de Privacidad en cualquier momento. Las modificaciones serán efectivas inmediatamente después de su publicación en la aplicación. Te recomendamos revisar periódicamente esta política para estar al tanto de cualquier cambio.</p>
+            <h2 class="mb-3 text-lg"><b>9. Contacto</b></h2>
+            <p class="mb-10 text-lg text-black">9.1. 10.1. Si tienes preguntas o inquietudes sobre esta Política de Privacidad o sobre el manejo de tu información personal, por favor contacta a RedWork Inc.</p>
     </main>
 </Layouts>
+
+<style>
+    @media screen and (max-width: 1024px) {    .desktop-view {
+            display: none;    }
+    }
+	@media screen and (min-width: 1023px) {    .mobile-view {
+			display: none;    }
+	}
+</style>
