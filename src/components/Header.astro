@@ -170,6 +170,14 @@ import Manual from "../pages/Manual.astro";
         });
     });
 }  
+document.addEventListener("DOMContentLoaded", function() { 
+    const cerrarButton = document.getElementById("cerrar");
+    if (cerrarButton) {
+        cerrarButton.addEventListener("click", function() { 
+            window.location.href = 'http://localhost:4321'; 
+        });
+    }
+});
 </script>
 
  
