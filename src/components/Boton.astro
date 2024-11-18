@@ -6,6 +6,6 @@ interface Props {
 
 const { texto, link } = Astro.props;
 ---
-<button class="text-white mx-auto h-10  py-1 bg-red-600 px-16 shadow-inner rounded-full font-bold">
+<button class="cursor-pointer text-white mx-auto h-10  py-1 bg-red-600 px-16 shadow-inner rounded-full font-bold">
     <a href={link}>{texto}</a>
 </button>

@@ -1,4 +1,4 @@
-<section class="star flex mx-11 justify-between md:hidden">
+<section class="star flex mx-11 justify-between mobile-view">
     <div class="felx flex-col ">
         <h2 class=" text-gray-600">Laura Tatiana
             <h3 class=" text-gray-600 "> 8 de noviembre de 2024</h2>  
@@ -40,6 +40,10 @@
       }
     .checked{
         @apply text-red-500;
+    }
+    @media screen and (min-width: 1023px) {.mobile-view {
+			display: none;
+    }
     }
 </style>
 <script>
