@@ -27,8 +27,36 @@ const { title } = Astro.props;
 		<script src="/script.js" defer></script>
 	</head>
 	<body>
+		<label for="toogle" id="label_toogle" class="justify-center mx-4 my-96 py-28 absolute top-10 object-left">
+			<i class="fa-solid fa-moon size-7 border py-2 px-2 bg-red-600 hover:bg-red-500 rounded-lg"></i>
+		</label>
+		<input type="checkbox" id="toogle" class="hidden"/>
 		<Header/>
 		<slot />
 		<Footer/>
 	</body>
 </html>
+<style>
+	.dark {
+		background-color: #1a202c;
+		color: white;
+		transition: all 1.5s ease;
+	}
+</style>
+<script>
+	let toogle = document.getElementById('toogle');
+	let label_toogle = document.getElementById('label_toogle');
+	toogle?.addEventListener('change', (event) => {
+		let checked = (event.target as HTMLInputElement)?.checked;
+		document.body.classList.toggle('dark');
+		if (checked==true) {
+			if (label_toogle) {
+				label_toogle.style.color = 'white';
+			}
+		} else {
+			if (label_toogle) {
+				label_toogle.style.color = 'black';
+			}
+		}
+	});
+</script>

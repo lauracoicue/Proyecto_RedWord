@@ -41,11 +41,12 @@ const infoItems = [
 	<Buscador/>
 	<section class="mobile-view"> 
 		<h2 class="text-center text-gray-600 font-xs"> Hoy hay más de <b>{numero}</b> trabajadores ofreciendo <br> sus servicios</h2>
-		<img src="/hero2.jpg" alt="" class="w-full h-full object-cover mobile-view">
+		<img src="hero2.png" alt="" class="w-full h-full object-cover mobile-view">
 	</section>
 	<section class="mobile-view my-32  flex flex-col items-center justify-center">
 		<h3 class="text-center">Si buscas ofertar tus servicios <br> ¡RedWork es tu mejor aliado!</h3>
-		<a id="crearCuenta" class="bg-red-600 text-white py-2 w-2/3 rounded-full mt-10 text-center" href={link}>Crea tu cuenta</a>
+		<Boton texto='Crea tu cuenta' link={link}/>
+	<!--<a id="crearCuenta" class="bg-red-600 text-white py-2 w-2/3 rounded-full mt-10 text-center" href={link}>Crea tu cuenta</a>  -->
 	</section>
 	<section  class="columns-2 justify-center items-center mobile-view mobile-view">
 			<h2 class="text-center text-5xl"><b>+50</b></h2>
@@ -77,7 +78,7 @@ const infoItems = [
 						<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                       </svg><b class="text-black ml-7"> Completa tu perfil.</b> Muestra que eres un excelente trabajador.</h3>                
 				</div>
-                <Boton texto='Registro' link='' />
+                <Boton texto='Registro' link={link}/>
             </div>
         </main>    
 	</section>

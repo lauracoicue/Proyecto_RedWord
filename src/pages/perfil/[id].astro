@@ -1,18 +1,30 @@
 ---
-import Layouts from '../layouts/Layout.astro';
-import Buscador from '../components/Buscador.astro';
-import Trabajos_Realizados from '../components/Trabajos_Realizados.astro';
-import Puntuacion from '../components/Puntuacion.astro';
+import type { GetStaticPaths } from "astro";
+import Layouts from '../../layouts/Layout.astro';
+import Buscador from '../../components/Buscador.astro';
+import Trabajos_Realizados from '../../components/Trabajos_Realizados.astro';
+import Puntuacion from '../../components/Puntuacion.astro';
+import { isAwaitExpression } from 'typescript';
+export async function getStaticPaths(){
+    const response = await fetch('http://localhost:3000/api/workers');
+    const workers = await response.json();
+    return workers.map((worker: {id: string}) => ({
+        params: {id: worker.id}
+    }));
+}
+const {id} = Astro.params;
+const response = await fetch(`http://localhost:3000/api/workers/${id}`);
+const worker = await response.json();
 
 ---
 
 <Layouts title="Perfil">
     <section class="mobile-view">
         <div class="columns-2 items-center justify-center p-16 mx-10 ">
-            <img src="usuario.png" alt="Imagen del trabajador" width="150" class="-mx-14">
+            <img src={worker.photo} alt="Imagen del trabajador" width="150" class="-mx-14">
             <div class="flex flex-col p-8">
-                <h2 class="font-bold text-sm/3 text-gray-600 -mx-20">Pedro Pablo Perez Pereira</h2>
-                <h3 class=" text-gray-700 my-2 text-3xs -mx-20">Soldador, Cerrajero, realizo todo tipo de trabajo con acero </h3>
+                <h2 class="font-bold text-sm/3 text-gray-600 -mx-20">{worker.fullName}</h2>
+                <h3 class=" text-gray-700 my-2 text-3xs -mx-20">{worker.job}</h3>
                 <div class="-mx-20 text-xs flex-col">
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve" class="size-3 absolute">
                         <g>
@@ -44,16 +56,10 @@ import Puntuacion from '../components/Puntuacion.astro';
         <Puntuacion/>
     <main class="columns-2 desktop-view mx-auto container mt-5 mb-10">
         <div class="perfil flex flex-col items-center justify-center p-16 mx-10 border border-black">
-            <img src="usuario.png" alt="Imagen del trabajador" width="150" class="-mx-14">
+            <img src={worker.photo} alt="Imagen del trabajador" width="150" class="-mx-14">
             <div class="flex flex-col mx-10  p-8 justify-between">
-                <h2 class="font-bold text-lg text-gray-600 -mx-20 text-center">Pedro Pablo Perez <br> Pereira</h2>
-                <h3 class=" text-gray-700 my-2  -mx-20">Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                                                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                                                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                                                                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-                                                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-                                                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-                                                                culpa qui officia deserunt mollit anim id est laborum.</h3>
+                <h2 class="font-bold text-lg text-gray-600 -mx-20 text-center">{worker.fullName}</h2>
+                <h3 class=" text-gray-700 my-2  -mx-20">{worker.job}</h3>
             </div>
             <div class="justify-between columns-2 desktop-view ">
                 <div class="text-xs -mx-10 flex-col">

@@ -2,6 +2,9 @@
 import Buscador from "../components/Buscador.astro"
 import Layout from "../layouts/Layout.astro"
 
+const response = await fetch('http://localhost:3000/api/workers');
+const workers = await response.json();
+
 ---
 
 <Layout title="RedWork - Página de Resultados">
@@ -16,23 +19,25 @@ import Layout from "../layouts/Layout.astro"
 
   <!-- Resultados -->
   <section class="results">
-    {Array(6).fill(0).map(() => (
-      <div class="result-item">
-        <div class="available-badge">Disponible</div>
-        <div class="result-content">
-          <div class="text-content">
-            <h3>Pedro Pablo Perez Pereira</h3>
-            <p>Soldador, Cerrajero, realizo todo tipo de trabajo con acero</p>
-            <div class="rating">
-              <span>⭐ 4.5 / 5.0</span>
+    {workers.map((worker : {id: string, fullName: string, job: string, photo: string}) => (
+      <a href={`/perfil/${worker.id}`} class="result-item" data-key = {worker.id}>
+        <div class="result-item">
+          <div class="available-badge">Disponible</div>
+          <div class="result-content">
+            <div class="text-content">
+              <h3>{worker.fullName}</h3>
+              <p>{worker.job}</p>
+              <div class="rating">
+                <span>⭐ 4.5 / 5.0</span>
+              </div>
+              <button class="contact-btn"><i class="fab fa-whatsapp" ></i> Contactar</button>
             </div>
-            <button class="contact-btn"><i class="fab fa-whatsapp" ></i> Contactar</button>
-          </div>
-          <div class="image-content">
-            <img src="/imagen_trabajador.png" alt="Foto de Pedro Pablo Perez Pereira">
+            <div class="image-content">
+              <img src={worker.photo} alt={`Foto de ${worker.fullName}`}>
+            </div>
           </div>
         </div>
-      </div>
+      </a>
     ))}
   </section>
 
