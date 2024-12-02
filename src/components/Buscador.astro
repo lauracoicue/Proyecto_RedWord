@@ -17,6 +17,7 @@ const searchFormClass = shouldShowFilters ? "search-form no-rounded-borders" : "
         </div>
         <button type="submit" class="search-btn">
             <i class="fas fa-search"></i> Buscar</button>
+            
         </form>
 
 
@@ -25,9 +26,17 @@ const searchFormClass = shouldShowFilters ? "search-form no-rounded-borders" : "
             <div class="filter-options">
                 <select>
                     <option value="disponibilidad">Disponibilidad</option>
+                    <option value="inmediata">Inmediata</option>
+                    <option value="mañana">Mañana</option>
+                    <option value="fin-de-semana">Fin de semana</option>
+                    <option value="proximo-mes">Proximo mes</option>
                 </select>
+                
                 <select>
                     <option value="puntaje">Puntaje</option>
+                    <option value="5-estrellas">5 estrellas</option>
+                    <option value="4-estrellas">4 estrellas</option>
+                    <option value="3-estrellas">3 estrellas</option>
                 </select>
             </div>
         </form>
