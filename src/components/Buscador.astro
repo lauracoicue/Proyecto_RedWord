@@ -33,8 +33,8 @@ const searchFormClass = shouldShowFilters ? "search-form no-rounded-borders" : "
         </form>
         )}
         <!-- Ventana superpuesta servicio categoría-->
-        <div id="overlay" class="overlay hidden">
-            <button class="back-btn" onclick="toggleOverlay(false)">Volver</button>
+        <div id="overlay" class="overlay">
+            <button class="back-btn">Volver</button>
             <div class="Search-bar">
                 <input type="text" placeholder="Servicio o categoría" class="search-inputhi mx-3">
                 <h3 class="text-sm text-black uppercase tracking-wide mt-6 my-4 border-b-2 border-gray-300 pb-2">Búsquedas más populares</h3> 
@@ -47,8 +47,8 @@ const searchFormClass = shouldShowFilters ? "search-form no-rounded-borders" : "
                 </ul>
             </div>
         </div>
-         <!-- Ventana superpuesta ubicación-->
-         <div id="overlay2" class="overlay hidden">
+        
+        <div id="overlay2" class="overlay">
             <button class="back-btn2" onclick="toggleOverlay(false)">Volver</button>
             <div class="Search-bar2">
                 <input type="text" placeholder="Ubicación" class="search-inputhi2 mx-3">
@@ -65,7 +65,7 @@ const searchFormClass = shouldShowFilters ? "search-form no-rounded-borders" : "
                     <li>Buga</li>
                 </ul>
             </div>
-        </div>
+        </div>        
   </section>
 
 <style> 
@@ -325,6 +325,90 @@ body {
     .search-form.no-rounded-borders {
     border-radius: 25;
     }
+    /*Ventana emergente*/
+    .overlay {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px; /* Ancho de la ventana */
+        background-color: #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        z-index: 1000;
+        padding: 20px;
+        visibility: hidden; /* Oculta la ventana por defecto */
+        opacity: 0; /* Hace la ventana invisible */
+        transition: visibility 0s, opacity 0.3s ease-in-out; /* Animación */
+    }
+
+    /* Mostrar la ventana */
+    .overlay.visible {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    /* Fondo oscuro cuando la ventana está activa */
+    body.overlay-active {
+        overflow: hidden;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    /* Estilo del botón "Volver" */
+    .back-btn {
+        background-color: #df1b1b;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+    .back-btn2{
+        background-color: #df1b1b;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+
+    /* Contenido interno */
+    .Search-bar, .Search-bar2 {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .Search-bar input,
+    .Search-bar2 input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .most-searched, .most-searched2 {
+        list-style: none;
+        padding: 0;
+    }
+
+    .most-searched li,
+    .most-searched2 li {
+        margin: 5px 0;
+        padding: 5px;
+        border-bottom: 1px solid #f0f0f0;
+        cursor: pointer;
+    }
+
+    /* Fondo oscuro cuando la ventana está activa */
+    body.overlay-active {
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.5);
+    }
 
 
 }
@@ -452,17 +536,24 @@ body {
     height: 100%;
     background: white;
     z-index: 1000;
-    display: flex;
+    display: none; /* Oculto por defecto */
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     padding-top: 100px;
     box-sizing: border-box;
     overflow-y: auto; /* Para manejar contenido largo */
+    transition: opacity 0.3s ease;
+}
+
+.overlay.visible {
+    display: flex; /* Mostrado al activarse */
+    opacity: 1; /* Asegura visibilidad */
 }
 
 .overlay.hidden {
     display: none;
+    opacity: 0;
 }
 
 .back-btn {
@@ -708,31 +799,46 @@ body {
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const searchInput = document.querySelector(".search-input1");
-        const searchInput2 = document.querySelector(".search-input2");
-        const overlay = document.getElementById("overlay");
-        const overlay2 = document.getElementById("overlay2");
-        const backButton = document.querySelector(".back-btn");
-        const backButton2 = document.querySelector(".back-btn2");
+    const searchInput = document.querySelector(".search-input1");
+    const searchInput2 = document.querySelector(".search-input2");
+    const overlay = document.getElementById("overlay");
+    const overlay2 = document.getElementById("overlay2");
+    const backButton = document.querySelector(".back-btn");
+    const backButton2 = document.querySelector(".back-btn2");
 
-        if (searchInput && overlay && backButton) {
-            searchInput.addEventListener("click", () => {
-                overlay.classList.remove("hidden");
-            });
+    // Función para mostrar la ventana emergente
+    const showOverlay = (overlay: HTMLElement) => {
+        overlay.classList.add("visible");
+        document.body.classList.add("overlay-active");
+    };
 
-            backButton.addEventListener("click", () => {
-                overlay.classList.add("hidden");
-            });
-        }
-        if (searchInput2 && overlay2 && backButton2) {
-            searchInput2.addEventListener("click", () => {
-                overlay2.classList.remove("hidden");
-            });
+    // Función para ocultar la ventana emergente
+    const hideOverlay = (overlay: HTMLElement) => {
+        overlay.classList.remove("visible");
+        document.body.classList.remove("overlay-active");
+    };
 
-            backButton2.addEventListener("click", () => {
-                overlay2.classList.add("hidden");
-            });
-        }
-    });
+    if (searchInput && overlay && backButton) {
+        searchInput.addEventListener("click", () => {
+            showOverlay(overlay);
+        });
+
+        backButton.addEventListener("click", () => {
+            hideOverlay(overlay);
+        });
+    }
+
+    if (searchInput2 && overlay2 && backButton2) {
+        searchInput2.addEventListener("click", () => {
+            showOverlay(overlay2);
+        });
+
+        backButton2.addEventListener("click", () => {
+            hideOverlay(overlay2);
+        });
+    }
+});
+
+
 </script>
 
