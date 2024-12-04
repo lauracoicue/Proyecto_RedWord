@@ -7,17 +7,37 @@ const searchFormClass = shouldShowFilters ? "search-form no-rounded-borders" : "
 <section class="search-section">
     <div class="contsearch">
         <form class={searchFormClass}>
-        <div class="input-container" >
-            <i class="fas fa-briefcase text-red-500"></i>
-            <input type="text" placeholder="Servicio o categoría" class="search-input1 mx-3" onclick="toggleOverlay(true)">
-        </div>
-        <div class="input-container" >
-            <i class="fas fa-map-marker-alt text-red-500"></i>
-            <input type="text" placeholder="Ubicación" class="search-input2 mx-3" onclick="toggleOverlay(true)">
-        </div>
-        <button type="submit" class="search-btn">
-            <i class="fas fa-search"></i> Buscar</button>
+            <div class="hola">
+                <select>
+                    <option value="service">Categoría</option>
+                    <option value="ser1">Mantenimiento de Vehículos</option>
+                    <option value="ser2">Arte y Diseño</option>
+                    <option value="ser3">Salud y Bienestar</option>
+                    <option value="ser4">Educación</option>
+                    <option value="ser5">Servicios de Transporte</option>
+                    <option value="ser6">Servicios del Hogar</option>
+                    <option value="ser7">Servicios Tecnológicos</option>
+                    <option value="ser8">Servicios Administrativos</option>
+                    <option value="ser9">Servicios Legales</option>
+                    <option value="ser10">Servicios Estéticos</option>
+                </select>
+            </div>
             
+            <div class="search-container">
+                <input type="text" placeholder="Servicio"/>
+            </div>
+
+            <div class="jj">
+                <select>
+                    <option value="ubica">Ubicación</option>
+                    <option value="miubi">Mi ubicación</option>
+                    <option value="abrirubi">Abrir mapa</option>
+                </select>
+            </div>
+            
+            <a href="http://localhost:4321/results" class="search-btn">
+                <i class="fas fa-search"></i> Buscar
+            </a>
         </form>
 
 
@@ -41,26 +61,7 @@ const searchFormClass = shouldShowFilters ? "search-form no-rounded-borders" : "
             </div>
         </form>
         )}
-        <!-- Ventana superpuesta servicio categoría-->
-        <div id="overlay" class="overlay">
-            <button class="back-btn">Volver</button>
-            <div class="Search-bar">
-                <input type="text" placeholder="Servicio o categoría" class="search-inputhi mx-3"> 
-                <ul class="most-searched"> 
-                    <li>Contrucción</li>
-                    <li>Mantenimiento de Vehículos</li>
-                    <li>Arte y Diseño</li>
-                    <li>Salud y Bienestar</li>
-                    <li>Educación</li>
-                    <li>Servicios de Transporte</li>  
-                    <li>Servicios del Hogar</li>
-                    <li>Servicios Tecnológicos</li>
-                    <li>Servicios Administrativos</li>
-                    <li>Servicios Legales</li>
-                    <li>Servicios Estéticos</li>
-                </ul>
-            </div>
-        </div>
+        
         
         <div id="overlay2" class="overlay">
             <button class="back-btn2" onclick="toggleOverlay(false)">Volver</button>
