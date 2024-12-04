@@ -2,86 +2,76 @@
 const currentUrl = Astro.url.pathname;
 const shouldShowFilters = currentUrl.includes("/results");
 const searchFormClass = shouldShowFilters ? "search-form no-rounded-borders" : "search-form rounded-borders";
+
+const response = await fetch('localhost:3000/api/workers/category/:category');
+const categorys = await response.json();
 ---
 <!-- Formulario de búsqueda -->
 <section class="search-section">
     <div class="contsearch">
-        <form class={searchFormClass}>
-            <div class="hola">
-                <select>
-                    <option value="service">Categoría</option>
-                    <option value="ser1">Mantenimiento de vehículos</option>
-                    <option value="ser2">Arte y diseño</option>
-                    <option value="ser3">Salud y bienestar</option>
-                    <option value="ser4">Educación</option>
-                    <option value="ser5">Servicios de transporte</option>
-                    <option value="ser6">Servicios del hogar</option>
-                    <option value="ser7">Servicios tecnológicos</option>
-                    <option value="ser8">Servicios administrativos</option>
-                    <option value="ser9">Servicios legales</option>
-                    <option value="ser10">Servicios estéticos</option>
-                </select>
-            </div>
-            
-            <div class="search-container">
-                <input type="text" placeholder="Servicio"/>
-            </div>
-
-            <div class="jj">
-                <select>
-                    <option value="ubica">Ubicación</option>
-                    <option value="miubi">Mi ubicación</option>
-                    <option value="abrirubi">Abrir mapa</option>
-                </select>
-            </div>
-            
-            <a href="http://localhost:4321/results" class="search-btn">
-                <i class="fas fa-search"></i> Buscar
-            </a>
-        </form>
-
-
-        {shouldShowFilters && (
-        <form class="search-form2">
-            <div class="filter-options">
-                <select>
-                    <option value="disponibilidad">Disponibilidad</option>
-                    <option value="inmediata">Inmediata</option>
-                    <option value="mañana">Mañana</option>
-                    <option value="fin-de-semana">Fin de semana</option>
-                    <option value="proximo-mes">Proximo mes</option>
-                </select>
-                
-                <select>
-                    <option value="puntaje">Puntaje</option>
-                    <option value="5-estrellas">5 estrellas</option>
-                    <option value="4-estrellas">4 estrellas</option>
-                    <option value="3-estrellas">3 estrellas</option>
-                </select>
-            </div>
-        </form>
-        )}
-        
-        
-        <div id="overlay2" class="overlay">
-            <button class="back-btn2" onclick="toggleOverlay(false)">Volver</button>
-            <div class="Search-bar2">
-                <input type="text" placeholder="Ubicación" class="search-inputhi2 mx-3">
-                <div class="flex flex-col space-y-2"> 
-                    <a class="text-gray-600" href="http://localhost:4321">Mi ubicación</a>
-                    <a class="text-gray-600" href="http://localhost:4321">Abrir mapa</a> 
-                    <hr>
+        {categorys.map((categor : {id: string, fullName: string, job: string, photo: string}) =>
+        <a href={`/results/${categor.id}`} class="result-item" data-key = {categor.id}> (
+            <form class={searchFormClass}>
+                <div class="hola">
+                    <select>
+                        <option value="service">Categoría</option>
+                        <option value="ser1">Mantenimiento de vehículos</option>
+                        <option value="ser2">Arte y diseño</option>
+                        <option value="ser3">Salud y bienestar</option>
+                        <option value="ser4">Educación</option>
+                        <option value="ser5">Servicios de transporte</option>
+                        <option value="ser6">Servicios del hogar</option>
+                        <option value="ser7">Servicios tecnológicos</option>
+                        <option value="ser8">Servicios administrativos</option>
+                        <option value="ser9">Servicios legales</option>
+                        <option value="ser10">Servicios estéticos</option>
+                    </select>
                 </div>
-                <ul class="most-searched2"> 
-                    <li>Roldanillo</li>
-                    <li>Cali</li>
-                    <li>Calima</li>
-                    <li>Tuluá</li>
-                    <li>Buga</li>
-                </ul>
-            </div>
-        </div>        
-  </section>
+            
+                <div class="search-container">
+                    <input type="text" placeholder="Servicio"/>
+                </div>
+
+                <div class="jj">
+                    <select>
+                        <option value="ubica">Ubicación</option>
+                        <option value="miubi">Mi ubicación</option>
+                        <option value="abrirubi">Abrir mapa</option>
+                    </select>
+                </div>
+                
+                <a href="http://localhost:4321/results" class="search-btn">
+                    <i class="fas fa-search"></i> Buscar
+                </a>
+            </form>
+
+            {shouldShowFilters && (
+                <form class="search-form2">
+                    <div class="filter-options">
+                        <select>
+                            <option value="disponibilidad">Disponibilidad</option>
+                            <option value="inmediata">Inmediata</option>
+                            <option value="mañana">Mañana</option>
+                            <option value="fin-de-semana">Fin de semana</option>
+                            <option value="proximo-mes">Proximo mes</option>
+                        </select>
+                        
+                        <select>
+                            <option value="puntaje">Puntaje</option>
+                            <option value="5-estrellas">5 estrellas</option>
+                            <option value="4-estrellas">4 estrellas</option>
+                            <option value="3-estrellas">3 estrellas</option>
+                        </select>
+                
+                    </div>
+                </form>
+            )}
+        </a>
+        )}
+    </div>
+        
+    
+     
 
 <style> 
 hr { border: none; height: 1px; background-color: #000000;
