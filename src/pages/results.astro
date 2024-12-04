@@ -20,7 +20,7 @@ const workers = await response.json();
   <!-- Resultados -->
   <section class="results">
     {workers.map((worker : {id: string, fullName: string, job: string, photo: string}) => (
-      <a href={`/perfil/${worker.id}`} class="result-item" data-key = {worker.id}>
+      <a href={`/perfil?${worker.id}`} class="result-item">
         <div class="result-item">
           <div class="available-badge">Disponible</div>
           <div class="result-content">
