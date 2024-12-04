@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="columns-2 justify-between">
         <a :href="`/perfil?${worker.id}`" class="result-item" v-for="worker in workers" :key="worker.id">
             <div class="result-item">
             <div class="available-badge">Disponible</div>

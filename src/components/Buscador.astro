@@ -2,15 +2,15 @@
 const currentUrl = Astro.url.pathname;
 const shouldShowFilters = currentUrl.includes("/results");
 const searchFormClass = shouldShowFilters ? "search-form no-rounded-borders" : "search-form rounded-borders";
-
+---
+<!--
 const response = await fetch('localhost:3000/api/workers/category/:category');
 const categorys = await response.json();
----
-<!-- Formulario de búsqueda -->
+Formulario de búsqueda -->
 <section class="search-section">
     <div class="contsearch">
-        {categorys.map((categor : {id: string, fullName: string, job: string, photo: string}) =>
-        <a href={`/results/${categor.id}`} class="result-item" data-key = {categor.id}> (
+        <!--{categorys.map((categor : {id: string, fullName: string, job: string, photo: string}) =>
+        <a href={`/results/${categor.id}`} class="result-item" data-key = {categor.id}> (-->
             <form class={searchFormClass}>
                 <div class="hola">
                     <select>
@@ -66,8 +66,8 @@ const categorys = await response.json();
                     </div>
                 </form>
             )}
-        </a>
-        )}
+        <!--</a>
+        )}-->
     </div>
         
     
