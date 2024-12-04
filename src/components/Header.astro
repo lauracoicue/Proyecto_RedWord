@@ -172,9 +172,10 @@ import Manual from "../pages/Manual.astro";
 }  
 document.addEventListener("DOMContentLoaded", function() { 
     const cerrarButton = document.getElementById("cerrar");
-    if (cerrarButton) {
+    const popup = document.getElementById("popup");
+    if (cerrarButton && popup) {
         cerrarButton.addEventListener("click", function() { 
-            window.location.href = 'http://localhost:4321'; 
+            popup.style.display = 'none';
         });
     }
 });

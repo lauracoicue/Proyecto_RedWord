@@ -11,9 +11,9 @@ Formulario de búsqueda -->
     <div class="contsearch">
         <!--{categorys.map((categor : {id: string, fullName: string, job: string, photo: string}) =>
         <a href={`/results/${categor.id}`} class="result-item" data-key = {categor.id}> (-->
-            <form class={searchFormClass}>
+            <form class={searchFormClass} id="searchForm">
                 <div class="hola">
-                    <select>
+                    <select id="category">
                         <option value="service">Categoría</option>
                         <option value="ser1">Mantenimiento de vehículos</option>
                         <option value="ser2">Arte y diseño</option>
@@ -29,21 +29,22 @@ Formulario de búsqueda -->
                 </div>
             
                 <div class="search-container">
-                    <input type="text" placeholder="Servicio"/>
+                    <input type="text" id="service" placeholder="Servicio" />
                 </div>
-
+            
                 <div class="jj">
-                    <select>
+                    <select id="location">
                         <option value="ubica">Ubicación</option>
                         <option value="miubi">Mi ubicación</option>
                         <option value="abrirubi">Abrir mapa</option>
                     </select>
                 </div>
-                
-                <a href="http://localhost:4321/results" class="search-btn">
+            
+                <button type="button" class="search-btn" id="search-btn">
                     <i class="fas fa-search"></i> Buscar
-                </a>
+                </button>
             </form>
+        
 
             {shouldShowFilters && (
                 <form class="search-form2">
@@ -477,40 +478,85 @@ body {
     .search-btn {
         background-color: rgb(228, 14, 14);
         color: #ffffff;
-        padding: 10px 20px;
+        padding: 10px;
         border: none;
         border-radius: 30px;
         cursor: pointer;
         font-weight: bold;
         font-size: 16px;
         margin: 10px;
+        width: 20%;
+        display: inline-block;
+        text-align: center; 
     }
+
     
     .search-btn i {
-        margin-right: 10px; /* Espacio entre el icono y el texto */
-        font-size: 16px; /* Tamaño del icono */
+        margin-right: 5px; /* Espacio entre el icono y el texto */
+        font-size: 8px; /* Tamaño del icono */
     }
-        
+
+    /* new menu selecction*/
+    .hola, .search-container, .jj { 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: center; 
+        padding: 10px; 
+        width: 100%; 
+        border-radius: 20px; 
+        margin-bottom: 3px; 
+    } 
     
+    .select, input[type="text"], select { 
+        width: 70%; 
+        padding: 10px; 
+        border: 1px solid #ccc; 
+        border-radius: 15px; 
+        box-shadow: inset 0 0 5px rgba(176, 54, 54, 0.1); 
+        font-size: 16px; background-color: #fff; 
+        color: #333; 
+        appearance: none; 
+        -webkit-appearance: none; 
+        -moz-appearance: none;
+    } 
+    
+    .option { 
+        text-align: center; 
+
+    } 
+    
+    /* Estilo básico para el formulario */ 
+    .searchFormClass { 
+        max-width: 500px; 
+        margin: auto; 
+        padding: 10px; 
+        border: 1px solid #ccc; 
+        border-radius: 20px; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        background-color: #f9f9f9;
+    }
+
     /* Filtros */
     
 
     /* Limitar el tamaño en pantallas pequeñas */
     .filter-options select {
-        padding: 10px 20px; /* Más espacio alrededor */
+        padding: 10px 15px; /* Más espacio alrededor */
         border-radius: 10px; /* Bordes redondeados */
         border: 2px solid #ccc; /* Borde más grueso */
-        font-size: 16px;
+        font-size: 14px;
         background-color: #f8f6f6; /* Fondo blanco */
         box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
         transition: all 0.3s ease; /* Transición suave para efectos */
         cursor: pointer; /* Cambiar el cursor al pasar */
         display: flex; /* Alinear el contenido dentro de los filtros */
         gap: 10px; /* Espacio entre filtros */
+        text-align: center;
     }
 
     .filter-options select:hover {
-        background-color: #fafafa; /* Ligero cambio de fondo al pasar el ratón */
+        background-color: #f2b2b2; /* Ligero cambio de fondo al pasar el ratón */
         box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
         background-color: #f7f7f7; /* Cambio de color de fondo */
     }
@@ -531,318 +577,69 @@ body {
         margin: 10px;
     }
 
-/*Ventana emergente servicio categoría*/
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    z-index: 1000;
-    display: none; /* Oculto por defecto */
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 100px;
-    box-sizing: border-box;
-    overflow-y: auto; /* Para manejar contenido largo */
-    transition: opacity 0.3s ease;
-}
-
-.overlay.visible {
-    display: flex; /* Mostrado al activarse */
-    opacity: 1; /* Asegura visibilidad */
-}
-
-.overlay.hidden {
-    display: none;
-    opacity: 0;
-}
-
-.back-btn {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background: none;
-    border-radius: 50%;
-    color: #cd0c0c;
-    font-size: 1.2rem;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-}
-
-.back-btn:hover {
-    transform: scale(1.1); /* Pequeño efecto de zoom */
-}
-
-.overlay-content {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    color: #333333;
-    width: 90%;
-    max-width: 600px;
-    width: 100%;
-}
-
-/* Barra de búsqueda */
-.search-bar {
-    display: flex;
-    align-items: center;
-    width: 90%;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    gap: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 60px;
-    max-width: 400px;
-}
-
-.search-inputhi {
-    flex: 1;
-    border: 2px solid #e0e0e0; /* Borde claro y moderno */
-    outline: none; /* Elimina el borde adicional al seleccionar */
-    font-size: 1rem;
-    padding: 10px 60px; /* Más espacio interno para un diseño cómodo */
-    border-radius: 10px; /* Bordes muy redondeados para un estilo más atractivo */
-    background: #ffffff; /* Fondo claro y suave */
-    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.08); /* Sombra interna sutil */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Efecto suave al interactuar */
-    color: #363636; /* Color del texto */
-    margin: 20px 80px;
-}
-
-.search-inputhi::placeholder {
-    color: #999999; /* Color del placeholder más suave */
-    font-style: italic; /* Estilo diferenciado para el placeholder */
-}
-
-.search-inputhi:focus {
-    border-color: #aea5a5; /* Color del borde en el enfoque */
-    box-shadow: 0px 0px 8px rgba(190, 185, 185, 0.5); /* Efecto de brillo en el enfoque */
-    background: #ffffff; /* Aclara el fondo para mayor contraste */
-}
-
-
-/* Lista de búsquedas más populares */
-.most-searched {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0 0;
-}
-
-.most-searched li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 15px;
-    border: 1px solid #ffffff;
-    border-radius: 8px;
-    background: #ffffff;
-    margin-bottom: 10px;
-    color: #555555;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.most-searched li:hover {
-    background: #e0e0e0;
-    transform: translateY(-2px); /* Efecto de elevación */
-}
-
-.most-searched li:last-child {
-    margin-bottom: 0;
-}
-
-
-
-/*Ventana emergente ubicación*/
-
-/* Ventana emergente ubicación */
-.overlay2 {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 100px;
-    box-sizing: border-box;
-    overflow-y: auto; /* Para manejar contenido largo */
-}
-
-.overlay2.hidden {
-    display: none;
-}
-
-.back-btn2 {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background: none;
-    border-radius: 50%;
-    color: #cd0c0c;
-    font-size: 1.2rem;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-}
-
-.back-btn2:hover {
-    transform: scale(1.1); /* Pequeño efecto de zoom */
-}
-
-.overlay-content2 {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    color: #333333;
-    width: 90%;
-    max-width: 600px;
-    width: 100%;
-}
-
-/* Barra de búsqueda */
-.search-bar2 {
-    display: flex;
-    align-items: center;
-    width: 90%;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    gap: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 60px;
-    max-width: 400px;
-}
-
-.search-inputhi2 {
-    flex: 1;
-    border: 2px solid #e0e0e0; /* Borde claro y moderno */
-    outline: none; /* Elimina el borde adicional al seleccionar */
-    font-size: 1rem;
-    padding: 12px 60px; /* Más espacio interno para un diseño cómodo */
-    border-radius: 10px; /* Bordes muy redondeados para un estilo más atractivo */
-    background: #ffffff; /* Fondo claro y suave */
-    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.08); /* Sombra interna sutil */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Efecto suave al interactuar */
-    color: #363636; /* Color del texto */
-    margin: 20px 80px;
-}
-
-.search-inputhi2::placeholder {
-    color: #999999; /* Color del placeholder más suave */
-    font-style: italic; /* Estilo diferenciado para el placeholder */
-}
-
-.search-inputhi2:focus {
-    border-color: #aea5a5; /* Color del borde en el enfoque */
-    box-shadow: 0px 0px 8px rgba(190, 185, 185, 0.5); /* Efecto de brillo en el enfoque */
-    background: #ffffff; /* Aclara el fondo para mayor contraste */
-}
-
-
-/* Lista de búsquedas más populares */
-.most-searched2 {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0 0;
-}
-
-.most-searched2 li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 15px;
-    border: 1px solid #ffffff;
-    border-radius: 8px;
-    background: #ffffff;
-    margin-bottom: 10px;
-    color: #555555;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.most-searched2 li:hover {
-    background: #e0e0e0;
-    transform: translateY(-2px); /* Efecto de elevación */
-}
-
-.most-searched2 li:last-child {
-    margin-bottom: 0;
-}
-
-
 }
 
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-    const searchInput = document.querySelector(".search-input1");
-    const searchInput2 = document.querySelector(".search-input2");
-    const overlay = document.getElementById("overlay");
-    const overlay2 = document.getElementById("overlay2");
-    const backButton = document.querySelector(".back-btn");
-    const backButton2 = document.querySelector(".back-btn2");
+    /*
+    document.addEventListener("DOMContentLoaded", function () {
+    const searchBtn = document.getElementById("search-btn")!;
+    const categoryElement = document.getElementById("category")!;
+    const serviceElement = document.getElementById("service")!;
+    const locationElement = document.getElementById("location")!;
 
-    // Función para mostrar la ventana emergente
-    const showOverlay = (overlay: HTMLElement) => {
-        overlay.classList.add("visible");
-        document.body.classList.add("overlay-active");
-    };
+    searchBtn.addEventListener("click", function () {
+        // Capturar valores seleccionados/ingresados
+        const category = (categoryElement as HTMLSelectElement).value;
+        const service = (serviceElement as HTMLInputElement).value;
+        const location = (locationElement as HTMLSelectElement).value;
 
-    // Función para ocultar la ventana emergente
-    const hideOverlay = (overlay: HTMLElement) => {
-        overlay.classList.remove("visible");
-        document.body.classList.remove("overlay-active");
-    };
+        if (!category || category === "service") {
+            console.error("Por favor selecciona una categoría válida.");
+            return;
+        }
 
-    if (searchInput && overlay && backButton) {
-        searchInput.addEventListener("click", () => {
-            showOverlay(overlay);
-        });
+        // Construir la URL con el valor de la categoría seleccionada
+        const url = `http://localhost:3000/api/workers/category/${encodeURIComponent(category)}`;
 
-        backButton.addEventListener("click", () => {
-            hideOverlay(overlay);
-        });
+        // Realizar la solicitud GET al backend
+        fetch(url, {
+            method: "GET",
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Error en la solicitud: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                // Mostrar la respuesta en la consola o manejar los datos
+                console.log("Datos recibidos del backend:", data);
+
+                // Ejemplo: Mostrar resultados en el DOM (opcional)
+                displayResults(data);
+            })
+            .catch((error) => {
+                console.error("Error al realizar la solicitud GET:", error);
+            });
+    });
+
+    // Función para mostrar los resultados en el DOM (opcional)
+    function displayResults(data: any) {
+        const resultsContainer = document.getElementById("results-container");
+        if (resultsContainer) {
+            resultsContainer.innerHTML = ""; // Limpia resultados anteriores
+            data.forEach((item: any) => {
+                const div = document.createElement("div");
+                div.textContent = `${item.fullName} - ${item.job}`;
+                resultsContainer.appendChild(div);
+            });
+        }
     }
+});*/
 
-    if (searchInput2 && overlay2 && backButton2) {
-        searchInput2.addEventListener("click", () => {
-            showOverlay(overlay2);
-        });
 
-        backButton2.addEventListener("click", () => {
-            hideOverlay(overlay2);
-        });
-    }
-});
 
 
 </script>
