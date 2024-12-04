@@ -1,0 +1,86 @@
+<template>
+    <section>
+        <a :href="`/perfil?${worker.id}`" class="result-item" v-for="worker in workers" :key="worker.id">
+            <div class="result-item">
+            <div class="available-badge">Disponible</div>
+            <div class="result-content">
+                <div class="text-content">
+                <h3>{{ worker.fullName }}</h3>
+                <p>{{ worker.job }}</p>
+                <div class="rating">
+                    <span>⭐ 4.5 / 5.0</span>
+                </div>
+                <button class="contact-btn"><i class="fab fa-whatsapp"></i> Contactar</button>
+                </div>
+                <div class="image-content">
+                <img :src="worker.photo" :alt="`Foto de ${worker.fullName}`">
+                </div>
+            </div>
+            </div>
+        </a>
+    </section>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            workers: []
+        };
+    },
+    created() {
+        this.obtenerResultados();
+    },
+    methods: {
+        async obtenerResultados() {
+            try {
+                const response = await fetch('http://localhost:3000/api/workers');
+                const data = await response.json();
+                this.workers = data;
+            } catch (error) {
+                console.error('Error al obtener los resultados:', error);
+            }
+        }
+    }
+};
+</script>
+
+<style scoped>
+
+/* Resultados */
+.results {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2em;
+    padding: 2em;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .results {
+        grid-template-columns: 1fr; /* Una sola columna para pantallas pequeñas */
+    }
+    
+    .result-item {
+        max-width: 100%; /* Las tarjetas ocupan todo el ancho en pantallas pequeñas */
+    }
+}
+
+/* Contenedor de la tarjeta de resultados */
+.result-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+    max-width: 600px; /* Ajusta esto para pantallas más grandes */
+    max-height: 300px; /* Ajusta esto para pantallas más grandes */
+}
+
+</style>
