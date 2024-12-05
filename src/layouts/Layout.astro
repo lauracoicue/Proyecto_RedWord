@@ -1,4 +1,5 @@
 ---
+import Contraste from '../components/Contraste.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 
@@ -27,10 +28,7 @@ const { title } = Astro.props;
 		<script src="/script.js" defer></script>
 	</head>
 	<body>
-		<label for="toogle" id="label_toogle" class="justify-center mx-4 my-96 py-28 absolute top-10 object-left">
-			<i class="fa-solid fa-moon size-7 border py-2 px-2 bg-red-600 hover:bg-red-500 rounded-lg"></i>
-		</label>
-		<input type="checkbox" id="toogle" class="hidden"/>
+		<Contraste/>
 		<Header/>
 		<slot />
 		<Footer/>
@@ -59,6 +57,4 @@ const { title } = Astro.props;
 			}
 		}
 	});
-
-	let category = '';
 </script>
