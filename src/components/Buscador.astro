@@ -40,9 +40,9 @@ Formulario de búsqueda -->
                     </select>
                 </div>
             
-                <button type="button" class="search-btn" id="search-btn">
+                <a href="http://localhost:4321/results" class="search-btn">
                     <i class="fas fa-search"></i> Buscar
-                </button>
+                </a>
             </form>
         
 
@@ -72,7 +72,36 @@ Formulario de búsqueda -->
     </div>
         
     
-     
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const categorySelect = document.getElementById("category");
+          const searchBtn = document.getElementById("search-btn");
+      
+          // Al cargar la página, recuperar el valor guardado en localStorage
+          const savedCategory = localStorage.getItem("selectedCategory");
+          if (savedCategory && categorySelect) {
+            (categorySelect as HTMLSelectElement).value = savedCategory; // Restaurar el valor de la categoría seleccionada
+          }
+      
+          // Al hacer clic en "Buscar", guardar la categoría seleccionada
+          if (searchBtn) {
+            searchBtn.addEventListener("click", () => {
+            const selectedCategory = categorySelect ? (categorySelect as HTMLSelectElement).value : '';
+            // Guardar la categoría seleccionada en localStorage
+            localStorage.setItem("selectedCategory", selectedCategory);
+            
+            // También se puede pasar a la siguiente página si es necesario
+            });
+          }
+          // Si se cambia la selección, se actualiza el valor en localStorage
+          if (categorySelect) {
+            categorySelect.addEventListener("change", () => {
+              const selectedCategory = (categorySelect as HTMLSelectElement).value;
+              localStorage.setItem("selectedCategory", selectedCategory);
+            });
+          }
+        });
+      </script>
 
 <style> 
 hr { border: none; height: 1px; background-color: #000000;
