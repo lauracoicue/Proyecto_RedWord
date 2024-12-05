@@ -41,3 +41,20 @@ const { title } = Astro.props;
 		transition: all 1.5s ease;
 	}
 </style>
+<script>
+	let toogle = document.getElementById('toogle');
+	let label_toogle = document.getElementById('label_toogle');
+	toogle?.addEventListener('change', (event) => {
+		let checked = (event.target as HTMLInputElement)?.checked;
+		document.body.classList.toggle('dark');
+		if (checked==true) {
+			if (label_toogle) {
+				label_toogle.style.color = 'white';
+			}
+		} else {
+			if (label_toogle) {
+				label_toogle.style.color = 'black';
+			}
+		}
+	});
+</script>
