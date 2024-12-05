@@ -1,22 +1,22 @@
 
 <template>
-    <section class="desktop-view columns-2 mx-44 my-16">
+    <section class="desktop-view mx-44 my-10">
         <a :href="`/perfil?${worker.id}`" class="result-item" v-for="worker in workers" :key="worker.id">
             <div class="result-item border border-black rounded-lg">
-            <div class="available-badge">Disponible</div>
-            <div class="result-content my-4 mx-7">
-                <div class="text-content">
-                <h3 class="font-bold">{{ worker.fullName }}</h3>
-                <p class="parrafo">{{ worker.job }}</p>
-                <div class="rating">
-                    <span>⭐ 4.5 / 5.0</span>
+                <div class="available-badge">Disponible</div>
+                    <div class="result-content my-4 mx-7">
+                        <div class="text-content">
+                            <h3 class="font-bold">{{ worker.fullName }}</h3>
+                            <p class="parrafo">{{ worker.job }}</p>
+                        <div class="rating">
+                            <span>⭐ 4.5 / 5.0</span>
+                        </div>
+                            <button class="contact-btn"><i class="fab fa-whatsapp"></i> Contactar</button>
+                        </div>
+                        <div class="image-content">
+                        <img :src="worker.photo" :alt="`Foto de ${worker.fullName}`">
+                    </div>
                 </div>
-                <button class="contact-btn"><i class="fab fa-whatsapp"></i> Contactar</button>
-                </div>
-                <div class="image-content">
-                <img :src="worker.photo" :alt="`Foto de ${worker.fullName}`">
-                </div>
-            </div>
             </div>
         </a>
     </section>
@@ -86,7 +86,7 @@ export default {
 }
 .result-item{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    flex-direction: column;
 }
     @media screen and (max-width: 1024px) {    .desktop-view {
             display: none;    }
