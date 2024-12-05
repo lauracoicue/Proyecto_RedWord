@@ -1,12 +1,12 @@
 <template>
-    <section class="columns-2 mx-96">
+    <section class="columns-2 mx-44 my-16">
         <a :href="`/perfil?${worker.id}`" class="result-item" v-for="worker in workers" :key="worker.id">
-            <div class="result-item">
+            <div class="result-item border border-black rounded-lg">
             <div class="available-badge">Disponible</div>
-            <div class="result-content">
+            <div class="result-content my-4 mx-7">
                 <div class="text-content">
-                <h3>{{ worker.fullName }}</h3>
-                <p>{{ worker.job }}</p>
+                <h3 class="font-bold">{{ worker.fullName }}</h3>
+                <p class="parrafo">{{ worker.job }}</p>
                 <div class="rating">
                     <span>⭐ 4.5 / 5.0</span>
                 </div>
@@ -53,6 +53,23 @@ export default {
 };
 </script>
 
+<style>
+.parrafo{
+    width: 300px;
+    overflow: hidden;
+    display: -webkit-box; 
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical; 
+    text-overflow: ellipsis; 
+    white-space: normal;
+}
+.result-item{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+</style>
+
+<!---
 <style scoped>
 
 /* Resultados */
@@ -90,5 +107,5 @@ export default {
     max-width: 600px; /* Ajusta esto para pantallas más grandes */
     max-height: 300px; /* Ajusta esto para pantallas más grandes */
 }
-
 </style>
+  --->

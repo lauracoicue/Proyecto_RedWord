@@ -86,10 +86,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1em;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     position: relative;
     max-width: 600px; /* Ajusta esto para pantallas más grandes */
     max-height: 300px; /* Ajusta esto para pantallas más grandes */
@@ -103,17 +100,11 @@ body {
 }
 
 /* Encabezado del nombre */
-h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-}
 
 /* Descripción */
 p {
     margin: 5px 0;
     font-size: 14px;
-    color: #666;
 }
 
 /* Calificación */
@@ -171,11 +162,6 @@ p {
     font-weight: bold;
 }
 
-.result-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
 .result-item img {
     max-width: 100px;
