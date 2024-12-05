@@ -1,6 +1,6 @@
 --- 
 import Buscador from "../components/Buscador.astro"
-import Prueba from "../components/Prueba.vue"
+import Islas from "../components/Islas.vue"
 import Layout from "../layouts/Layout.astro"
 
 const response = await fetch('http://localhost:3000/api/workers');
@@ -17,12 +17,8 @@ const workers = await response.json();
   </header>
 
   <Buscador />
-
+    <Islas client:load/>
   
-  <section class="results">
-    <Prueba client:load/>
-  </section>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" defer></script>
   <script src="script.js" defer></script>
 </Layout>
