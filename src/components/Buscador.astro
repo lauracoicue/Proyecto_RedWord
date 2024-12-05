@@ -14,7 +14,8 @@ Formulario de búsqueda -->
             <form class={searchFormClass} id="searchForm">
                 <div class="hola">
                     <select id="category">
-                        <option value="service">Categoría</option>
+                        <option value="" disabled selected>Categoría</option>
+                        <option value="ser0">Construcción</option>
                         <option value="ser1">Mantenimiento de vehículos</option>
                         <option value="ser2">Arte y diseño</option>
                         <option value="ser3">Salud y bienestar</option>
@@ -34,7 +35,7 @@ Formulario de búsqueda -->
             
                 <div class="jj">
                     <select id="location">
-                        <option value="ubica">Ubicación</option>
+                        <option value="" disabled selected>Ubicación</option>
                         <option value="miubi">Mi ubicación</option>
                         <option value="abrirubi">Abrir mapa</option>
                     </select>
@@ -45,18 +46,21 @@ Formulario de búsqueda -->
                 </a>
             </form>
         
+            <div id="map-container" style="display:none; height: 500px; width: 100%;">
+                <iframe
+                    id="google-map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121000.37913521962!2d-3.7037901999999998!3d40.416775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42288b7c3b5bdb%3A0x2ee39f6b6f4f5352!2sMadrid%2C%20España!5e0!3m2!1ses!2ses!4v1689941295012!5m2!1ses!2ses"
+                    width="600"
+                    height="450"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+            </div>
 
             {shouldShowFilters && (
                 <form class="search-form2">
-                    <div class="filter-options">
-                        <select>
-                            <option value="disponibilidad">Disponibilidad</option>
-                            <option value="inmediata">Inmediata</option>
-                            <option value="mañana">Mañana</option>
-                            <option value="fin-de-semana">Fin de semana</option>
-                            <option value="proximo-mes">Proximo mes</option>
-                        </select>
-                        
+                    <div class="filter-options">    
                         <select>
                             <option value="puntaje">Puntaje</option>
                             <option value="5-estrellas">5 estrellas</option>
@@ -76,12 +80,20 @@ Formulario de búsqueda -->
         document.addEventListener("DOMContentLoaded", () => {
           const categorySelect = document.getElementById("category");
           const searchBtn = document.getElementById("search-btn");
+         
       
           // Al cargar la página, recuperar el valor guardado en localStorage
-          const savedCategory = localStorage.getItem("selectedCategory");
-          if (savedCategory && categorySelect) {
-            (categorySelect as HTMLSelectElement).value = savedCategory; // Restaurar el valor de la categoría seleccionada
+          if (window.location.pathname === "/results") {
+            const savedCategory = localStorage.getItem("selectedCategory");
+            if (savedCategory && categorySelect) {
+              (categorySelect as HTMLSelectElement).value = savedCategory; // Restaurar el valor de la categoría seleccionada
+            }
+          } else {
+            localStorage.removeItem("selectedCategory"); // Limpiar el valor al salir de la página
+            (categorySelect as HTMLSelectElement).value = '';
+        
           }
+         
       
           // Al hacer clic en "Buscar", guardar la categoría seleccionada
           if (searchBtn) {
@@ -100,6 +112,22 @@ Formulario de búsqueda -->
               localStorage.setItem("selectedCategory", selectedCategory);
             });
           }
+
+
+          let locationSelect = document.getElementById("location");
+
+          if (locationSelect) {
+            locationSelect.addEventListener("change", function () {
+                if ((this as HTMLSelectElement).value === "abrirubi") {
+                    // Redirige al usuario a Google Maps con una ubicación predeterminada o personalizable
+                    // Puedes usar una dirección específica o coordenadas geográficas
+                    const location = "Ubicación+especificada";  // Reemplaza por la ubicación que desees
+                    const url = `https://www.google.com/maps/search/?q=${location}`;
+                    window.location.href = url;  // Redirige a la URL de Google Maps
+                }
+            });
+          }
+
         });
       </script>
 
@@ -611,47 +639,33 @@ body {
 </style>
 
 <script>
-    /*
+    
     document.addEventListener("DOMContentLoaded", function () {
     const searchBtn = document.getElementById("search-btn")!;
     const categoryElement = document.getElementById("category")!;
     const serviceElement = document.getElementById("service")!;
     const locationElement = document.getElementById("location")!;
 
-    searchBtn.addEventListener("click", function () {
+    searchBtn.addEventListener("click",  async () =>{
         // Capturar valores seleccionados/ingresados
         const category = (categoryElement as HTMLSelectElement).value;
         const service = (serviceElement as HTMLInputElement).value;
         const location = (locationElement as HTMLSelectElement).value;
 
-        if (!category || category === "service") {
-            console.error("Por favor selecciona una categoría válida.");
-            return;
-        }
-
         // Construir la URL con el valor de la categoría seleccionada
-        const url = `http://localhost:3000/api/workers/category/${encodeURIComponent(category)}`;
+        const url = `http://localhost:3000/api/workers/category/${category}?search=${service}`;
 
         // Realizar la solicitud GET al backend
-        fetch(url, {
-            method: "GET",
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Error en la solicitud: ${response.statusText}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                // Mostrar la respuesta en la consola o manejar los datos
-                console.log("Datos recibidos del backend:", data);
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+       ;
+        } catch (error) {
+            console.error("Error al obtener los datos:", error);
+        }
+       
+    
 
-                // Ejemplo: Mostrar resultados en el DOM (opcional)
-                displayResults(data);
-            })
-            .catch((error) => {
-                console.error("Error al realizar la solicitud GET:", error);
-            });
     });
 
     // Función para mostrar los resultados en el DOM (opcional)
@@ -666,7 +680,7 @@ body {
             });
         }
     }
-});*/
+});
 
 
 
