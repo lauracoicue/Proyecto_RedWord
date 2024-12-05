@@ -6,7 +6,6 @@ import Item from '../components/Item.astro';
 import CorazonSvg from '../svgs/CorazonSvg.astro';
 import MensajeSvg from '../svgs/MensajeSvg.astro';
 import RedSvg from '../svgs/RedSvg.astro';
-import NuevoBuscador from '../components/NuevoBuscador.astro';
 
 
 const response = await fetch('http://localhost:3000/api/');
@@ -40,7 +39,7 @@ const infoItems = [
 <Layout title="RedWork">
 	<Buscador/>
 	<section class="mobile-view"> 
-		<h2 class="text-center text-gray-600 font-xs"> Hoy hay más de <b>{numero}</b> trabajadores ofreciendo <br> sus servicios</h2>
+		<h2 class="text-center font-xs"> Hoy hay más de <b>{numero}</b> trabajadores ofreciendo <br> sus servicios</h2>
 		<img src="hero2.png" alt="" class="w-full h-full object-cover mobile-view">
 	</section>
 	<section class="mobile-view my-32  flex flex-col items-center justify-center">
@@ -50,16 +49,16 @@ const infoItems = [
 	</section>
 	<section  class="columns-2 justify-center items-center mobile-view mobile-view">
 			<h2 class="text-center text-5xl"><b>+50</b></h2>
-			<h1 class="text-center text-gray-600">Trabajadores<br> activos</h1>
+			<h1 class="text-center">Trabajadores<br> activos</h1>
 		
 			<h2 class="text-center text-5xl"><b>+100</b></h2>
-			<h1 class="text-center text-gray-600"> Clientes<br>satisfechos</h1>
+			<h1 class="text-center"> Clientes<br>satisfechos</h1>
 
 	</section>
     <section class=" my-24 container mx-auto desktop-view">        
 		<header class="mx-36">
             <h1 class="text-center font-bold text-lg">Si buscas ofrecer tus servicios o encontrar excelentes trabajadores <br> ¡RedWord es tu mejor opción!</h1>
-            <h3 class="text-gray-700 text-center my-4">Ayudando a miles de trabajadores informales</h3>        
+            <h3 class=" text-center my-4">Ayudando a miles de trabajadores informales</h3>        
 		</header>
         <main class="columns-2 mt-8 flex justify-center items-center py-20">            
 			<div class="mx-10 my-auto">
@@ -67,16 +66,16 @@ const infoItems = [
             </div>
             <div class="flex flex-col items-center">                    
 				<h2 class="text-center font-bold">Te ayudamos a encontrar clientes de una <br> manera segura y rapida
-                    <h3 class="text-center text-gray-700 my-2 ">Haz que tu perfil sea visible para miles de clientes</h2>                
+                    <h3 class="text-center  my-2 ">Haz que tu perfil sea visible para miles de clientes</h2>                
 				<div class="mx-7 py-10">
-                    <h3 class="text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-600 absolute">                        
+                    <h3 class=""><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-600 absolute">                        
 						<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                      </svg><b class="text-black ml-7">Registro gratuito.</b> Encuentra nuevas oportunidades hoy.</h3>                    
-					<h3 class="text-gray-700"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-600 absolute">
+                      </svg><b class="ml-7">Registro gratuito.</b> Encuentra nuevas oportunidades hoy.</h3>                    
+					<h3 class=""> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-600 absolute">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg><b class="text-black ml-7"> Solicidudes cada dia. </b> Trabajos que se adapten a tu perfil.</h3>
-                    <h3 class="text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-600 absolute">                        
+                    <h3 class=""><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-600 absolute">                        
 						<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                      </svg><b class="text-black ml-7"> Completa tu perfil.</b> Muestra que eres un excelente trabajador.</h3>                
+                      </svg><b class="ml-7"> Completa tu perfil.</b> Muestra que eres un excelente trabajador.</h3>                
 				</div>
                 <Boton texto='Registro' link={link}/>
             </div>
