@@ -22,6 +22,7 @@
 </template>
 
 <script>
+
 export default {
     data() {
         return {
@@ -29,12 +30,19 @@ export default {
         };
     },
     created() {
+        console.log('Componente Prueba.vue creado');
+        console.log('Obteniendo resultados...');
+        console.log(window.location.href);
         this.obtenerResultados();
     },
     methods: {
         async obtenerResultados() {
             try {
-                const response = await fetch('http://localhost:3000/api/workers');
+                const localUrl = window.location.search;
+                const searchParams = new URLSearchParams(localUrl);
+                const category = searchParams.get('category');
+                const service = searchParams.get('service') || '';
+                const response = await fetch(`http://localhost:3000/api/workers/category/${category}?search=${service}`);
                 const data = await response.json();
                 this.workers = data;
             } catch (error) {

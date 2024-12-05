@@ -20,9 +20,18 @@ const workers = await response.json();
 
   
   <section class="results">
-    <Prueba client:load/>
+    <Prueba client:only/>
   </section>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" defer></script>
-  <script src="script.js" defer></script>
 </Layout>
+
+
+<script>
+   // http://localhost:4321/results?category=CATEGORY&service=SERVICE
+   const category = new URLSearchParams(window.location.search).get('category');
+    const service = new URLSearchParams(window.location.search).get('service');
+    //const url = `http://localhost:3000/api/workers?category=${category}&service=${service}`;
+    //console.log(category);
+    //console.log(service);
+</script>
