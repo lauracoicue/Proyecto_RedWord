@@ -1,0 +1,59 @@
+<div class="fixed top-1/4 left-2 flex flex-col items-center space-y-3 my-64">
+    <label for="toogle" id="label_toogle" class="justify-center mx-4 -my-5 py-4 cursor-pointer">
+      <i id="moon-icon" class="fa-solid fa-moon text-white size-6 py-3 px-3 bg-red-600 hover:bg-red-500 rounded-lg"></i>
+    </label>
+    <input type="checkbox" id="toogle" class="hidden" />
+    <button id="increase-font" class="font-bold px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-500">A+</button>
+    <button id="decrease-font" class="font-bold px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-500">A-</button>
+    <button id="reset-font" class="fond-bold px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-500"><i class="fa-solid fa-sync"></i></button>
+  </div>
+  
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    let body = document.body;
+    let toogle = document.getElementById("toogle");
+
+    // Modo oscuro
+    toogle?.addEventListener("change", (event) => {
+      let isChecked = (event.target as HTMLInputElement).checked;
+
+      if (isChecked) {
+        body.classList.add("bg-black", "text-white");
+        body.classList.remove("bg-white", "text-black");
+      } else {
+        body.classList.add("bg-white", "text-black");
+        body.classList.remove("bg-black", "text-white");
+      }
+    });
+
+
+    let defaultFontSize = 16; 
+    let currentFontSize = defaultFontSize;
+
+    let increaseFontButton = document.getElementById("increase-font");
+    if (increaseFontButton) {
+      increaseFontButton.addEventListener("click", () => {
+        currentFontSize += 2; 
+        body.style.fontSize = `${currentFontSize}px`;
+      });
+    }
+
+    let decreaseFontButton = document.getElementById("decrease-font");
+    if (decreaseFontButton) {
+      decreaseFontButton.addEventListener("click", () => {
+        if (currentFontSize > 10) { 
+          currentFontSize -= 2; 
+          body.style.fontSize = `${currentFontSize}px`;
+        }
+      });
+    }
+
+    let resetFontButton = document.getElementById("reset-font");
+    if (resetFontButton) {
+      resetFontButton.addEventListener("click", () => {
+        currentFontSize = defaultFontSize;
+        body.style.fontSize = `${defaultFontSize}px`;
+      });
+    }
+  });
+</script>
