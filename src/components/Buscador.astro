@@ -99,18 +99,25 @@ Formulario de búsqueda -->
     console.log(category);
 
     document.addEventListener("DOMContentLoaded", () => {
-      
-        // Al cargar la página, recuperar el valor guardado en localStorage
-        if (window.location.pathname === "/results") {
-            const savedCategory = localStorage.getItem("selectedCategory");
-            if (savedCategory && categorySelect) {
-                (categorySelect as HTMLSelectElement).value = savedCategory; // Restaurar el valor de la categoría seleccionada
-            }
-        } else {
-            localStorage.removeItem("selectedCategory"); // Limpiar el valor al salir de la página
-            (categorySelect as HTMLSelectElement).value = "";
-        }
 
+    // Al cargar la página, recuperar el valor guardado en sessionStorage
+    if (window.location.pathname === "/results") {
+        const savedCategory = sessionStorage.getItem("selectedCategory");
+        if (savedCategory && categorySelect) {
+            categorySelect.value = savedCategory; // Restaurar el valor de la categoría seleccionada
+        }
+    }
+
+    // Al cambiar la categoría, guardar en sessionStorage
+    categorySelect?.addEventListener("change", () => {
+        sessionStorage.setItem("selectedCategory", categorySelect.value);
+    });
+
+    // Antes de abandonar la página "results", limpiar sessionStorage
+    if (window.location.pathname !== "/results") {
+        sessionStorage.removeItem("selectedCategory");
+    }
+        
         searchBtn!.addEventListener("click", async () => {
             const category = categorySelect!.value;
             const categoryName = categorySelect!.options[categorySelect!.selectedIndex].text;
