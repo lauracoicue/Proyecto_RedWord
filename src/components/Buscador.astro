@@ -4,6 +4,17 @@ const shouldShowFilters = currentUrl.includes("/results");
 const searchFormClass = shouldShowFilters
     ? "search-form no-rounded-borders"
     : "search-form rounded-borders";
+
+import Mapa from "./Mapa.astro";
+
+let openMap = false;
+
+const handleLocationChange = (event: Event) => {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    if (selectedValue === "abrirubi") {
+        openMap = true; // Activar el modal
+    }
+};
 ---
 
 <!--
@@ -37,7 +48,7 @@ Formulario de búsqueda -->
             </div>
 
             <div class="jj">
-                <select id="location">
+                <select id="location" onchange="{handleLocationChange}">
                     <option value="" disabled selected>Ubicación</option>
                     <option value="miubi">Mi ubicación</option>
                     <option value="abrirubi">Abrir mapa</option>
@@ -47,7 +58,11 @@ Formulario de búsqueda -->
             <button type="button" class="search-btn" id="search-btn">
                 <i class="fas fa-search"></i> <a href="">Buscar</a>
             </button>
+
         </form>
+
+        <!-- Integrar el modal del mapa -->
+        <Mapa isOpen={openMap} />
 
         {
             shouldShowFilters && (
@@ -63,8 +78,7 @@ Formulario de búsqueda -->
                 </form>
             )
         }
-        <!--</a>
-        )}-->
+
     </div>
 </section>
 
@@ -138,6 +152,7 @@ Formulario de búsqueda -->
     }
 
     /*--------------------------------*/
+    /*Desktop*/
     @media (max-width: 1023px) {
         button {
             margin: 10px;
@@ -317,8 +332,7 @@ Formulario de búsqueda -->
             color: #aaa; /* Color del placeholder */
         }
         .search-input2::placeholder {
-            /*padding-left: 10px;  /* Asegura que el placeholder también tenga espacio para el ícono */
-            color: #aaa; /* Color del placeholder */
+            color: #aaa; 
         }
 
         .search-btn {

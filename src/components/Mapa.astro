@@ -1,0 +1,82 @@
+---
+export interface MapaProps {
+  isOpen?: boolean; // Permitir que el modal se controle externamente
+}
+
+let isOpen = Astro.props.isOpen || false;
+
+// Manejar la apertura y cierre del modal
+const toggleModal = (state?: boolean) => {
+  isOpen = state !== undefined ? state : !isOpen;
+};
+---
+
+<div>
+  {isOpen && (
+    <div class="modal-overlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>Mapa Interactivo</h2>
+          <button class="close-button" onclick="(() => { document.dispatchEvent(new Event('close-modal')); })()">&times;</button>
+        </div>
+        <div class="map-container">
+          <p>Aquí se mostrará el mapa interactivo.</p>
+        </div>
+      </div>
+    </div>
+  )}
+</div>
+
+
+<style>
+  .modal-overlay {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .modal-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 300px;
+    background-color: #e0e0e0;
+  }
+</style>
