@@ -31,14 +31,8 @@ const handleLocationChange = (event: Event) => {
 
 ---
 
-<!--
-const response = await fetch('localhost:3000/api/workers/category/:category');
-const categorys = await response.json();
-Formulario de búsqueda -->
 <section class="search-section">
     <div class="contsearch">
-        <!--{categorys.map((categor : {id: string, fullName: string, job: string, photo: string}) =>
-        <a href={`/results/${categor.id}`} class="result-item" data-key = {categor.id}> (-->
         <form class={searchFormClass} id="searchForm">
             <div class="hola">
                 <select id="category">
@@ -110,13 +104,11 @@ Formulario de búsqueda -->
 <!--script para abrir y cerrar ventana emergente del mapa -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Variables globales para el modal
     const modalOverlay = document.querySelector('.modal-overlay');
     const closeModalButton = document.querySelector('.close-button');
     const locationSelect = document.getElementById('location');
     let isOpen = false;
 
-    // Mostrar modal al seleccionar "Abrir mapa"
     locationSelect?.addEventListener('change', (event) => {
         const selectedValue = (event.target as HTMLSelectElement)?.value;
         if (selectedValue === "abrirubi") {
@@ -125,13 +117,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Cerrar modal al hacer clic en el botón
     closeModalButton?.addEventListener('click', () => {
         modalOverlay?.classList.remove('visible');
         isOpen = false;
     });
 
-    // Cerrar modal desde eventos personalizados
     document.addEventListener('close-modal', () => {
         modalOverlay?.classList.remove('visible');
         isOpen = false;
