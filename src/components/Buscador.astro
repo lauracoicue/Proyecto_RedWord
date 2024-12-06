@@ -5,14 +5,18 @@ const searchFormClass = shouldShowFilters
     ? "search-form no-rounded-borders"
     : "search-form rounded-borders";
 
-import Mapa from "./Mapa.astro";
+let isOpen: boolean = false;
+let isModalOpen: boolean = false;
+let openMap = () => {console.log('Mapa abierto');};
 
-let openMap = false;
+const toggleModal = (state?: boolean) => {
+isOpen = state !== undefined ? state : !isOpen;
+};
 
 const handleLocationChange = (event: Event) => {
     const selectedValue = (event.target as HTMLSelectElement).value;
     if (selectedValue === "abrirubi") {
-        openMap = true; // Activar el modal
+        isModalOpen = true; // Activar el modal
     }
 };
 ---
@@ -48,11 +52,11 @@ Formulario de búsqueda -->
             </div>
 
             <div class="jj">
-                <select id="location" onchange="{handleLocationChange}">
+                <select id="location">
                     <option value="" disabled selected>Ubicación</option>
                     <option value="miubi">Mi ubicación</option>
                     <option value="abrirubi">Abrir mapa</option>
-                </select>
+                </select>                
             </div>
 
             <button type="button" class="search-btn" id="search-btn">
@@ -61,11 +65,21 @@ Formulario de búsqueda -->
 
         </form>
 
-        <!-- Integrar el modal del mapa -->
-        <Mapa isOpen={openMap} />
+        {isOpen && (
+            <div class="modal-overlay">
+                <div class="modal">
+                    <div class="modal-header">
+                        <h2>Mapa Interactivo</h2>
+                        <button class="close-button">&times;</button>
+                    </div>
+                    <div class="map-container">
+                        <p>Aquí se mostrará el mapa interactivo.</p>
+                    </div>
+                </div>
+            </div>
+        )}
 
-        {
-            shouldShowFilters && (
+        {shouldShowFilters && (
                 <form class="search-form2">
                     <div class="filter-options">
                         <select>
@@ -79,9 +93,100 @@ Formulario de búsqueda -->
             )
         }
 
+
     </div>
 </section>
 
+<!--script para abrir y cerrar ventana emergente del mapa -->
+<script>
+
+let isOpen = false;
+
+document.addEventListener('DOMContentLoaded', () => {
+    const locationSelect = document.getElementById('location');
+    const modalOverlay = document.querySelector('.modal-overlay');
+    const closeModalButton = document.querySelector('.close-button');
+
+    // Manejo del cambio de ubicación
+    locationSelect?.addEventListener('change', (event) => {
+        const selectedValue = (event.target as HTMLSelectElement)?.value; // Obtiene el valor seleccionado
+        if (selectedValue === "abrirubi") {
+            modalOverlay?.classList.add('visible'); // Mostrar el modal
+            isOpen = true;
+        }
+    });
+
+    // Manejo del cierre del modal
+    closeModalButton?.addEventListener('click', () => {
+        modalOverlay?.classList.remove('visible'); // Ocultar el modal
+        isOpen = false;
+    });
+
+    // Listener global para cerrar el modal con el evento 'close-modal'
+    document.addEventListener('close-modal', () => {
+        modalOverlay?.classList.remove('visible'); // Ocultar el modal
+        isOpen = false;
+    });
+});
+
+</script>
+
+<!--estilos mapa emergente-->
+<style>
+    .modal-overlay {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .modal-overlay.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .modal {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transform: scale(1);
+        transition: transform 0.3s ease;
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .close-button {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .map-container {
+        width: 100%;
+        height: 300px;
+        background-color: #e0e0e0;
+    }
+</style>
+
+
+<!--script para mantener los datos entre paginas -->
 <script>
     const categorySelect = document.getElementById(
         "category",
@@ -131,7 +236,9 @@ Formulario de búsqueda -->
             
         });
     });
+
 </script>
+
 
 <style>
     hr {
