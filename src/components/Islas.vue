@@ -1,8 +1,8 @@
 
 <template>
-    <section class="desktop-view mx-44 my-10">
+    <section class="desktop-view mx-44 my-10 space-y-24 ">
         <a :href="`/perfil?${worker.id}`" class="result-item" v-for="worker in workers" :key="worker.id">
-            <div class="result-item border border-black rounded-lg">
+            <div class="result-item border border-black shadow-md rounded-lg">
                 <div class="available-badge">Disponible</div>
                     <div class="result-content my-4 mx-7">
                         <div class="text-content">
@@ -86,7 +86,10 @@ export default {
 }
 .result-item{
     display: grid;
-    flex-direction: column;
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    
 }
     @media screen and (max-width: 1024px) {    .desktop-view {
             display: none;    }

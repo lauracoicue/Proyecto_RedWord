@@ -1,126 +1,77 @@
 <div class="fixed top-1/4 left-2 flex flex-col items-center space-y-3 my-64">
-    <label for="toogle" id="label_toogle" class="justify-center mx-4 -my-5 py-4 cursor-pointer">
-      <i id="moon-icon" class="fa-solid fa-moon text-white size-6 py-3 px-3 bg-red-600 hover:bg-red-500 rounded-lg"></i>
-    </label>
-    <input type="checkbox" id="toogle" class="hidden" />
-    <button id="increase-font" class="font-bold px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-500">A+</button>
-    <button id="decrease-font" class="font-bold px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-500">A-</button>
-    <button id="reset-font" class="fond-bold px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-500"><i class="fa-solid fa-sync"></i></button>
-  </div>
-  
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    let body = document.body;
-    let toogle = document.getElementById("toogle");
+  <!-- Botón de contraste -->
+  <button id="toggle-contrast" class="font-bold px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-500">
+    <i id="moon-icon" class="fa-solid fa-moon"></i>
+  </button>
 
-    toogle?.addEventListener("change", (event) => {
-      let isChecked = (event.target as HTMLInputElement).checked;
-
-      if (isChecked) {
-        body.classList.add("bg-black", "text-white");
-        body.classList.remove("bg-white", "text-black");
-      } else {
-        body.classList.add("bg-white", "text-black");
-        body.classList.remove("bg-black", "text-white");
-      }
-    });
-
-
-    let defaultFontSize = 16; 
-    let currentFontSize = defaultFontSize;
-
-    let increaseFontButton = document.getElementById("increase-font");
-    if (increaseFontButton) {
-      increaseFontButton.addEventListener("click", () => {
-        currentFontSize += 2; 
-        body.style.fontSize = `${currentFontSize}px`;
-      });
-    }
-
-    let decreaseFontButton = document.getElementById("decrease-font");
-    if (decreaseFontButton) {
-      decreaseFontButton.addEventListener("click", () => {
-        if (currentFontSize > 10) { 
-          currentFontSize -= 2; 
-          body.style.fontSize = `${currentFontSize}px`;
-        }
-      });
-    }
-
-    let resetFontButton = document.getElementById("reset-font");
-    if (resetFontButton) {
-      resetFontButton.addEventListener("click", () => {
-        currentFontSize = defaultFontSize;
-        body.style.fontSize = `${defaultFontSize}px`;
-      });
-    }
-  });
-</script>
-<!--<div class="fixed top-1/4 left-2 flex flex-col items-center space-y-3 my-64">
-  <label for="toogle" id="label_toogle" class="justify-center mx-4 -my-5 py-4 cursor-pointer">
-    <i id="moon-icon" class="fa-solid fa-moon size-6 py-3 px-3 bg-red-600 hover:bg-red-500 rounded-lg"></i>
-  </label>
-  <input type="checkbox" id="toogle" class="hidden" />
-  <button id="increase-font" class="font-bold px-4 py-3 bg-red-600 rounded-lg hover:bg-red-500">A+</button>
-  <button id="decrease-font" class="font-bold px-4 py-3 bg-red-600 rounded-lg hover:bg-red-500">A-</button>
-  <button id="reset-font" class="font-bold px-4 py-3 bg-red-600 rounded-lg hover:bg-red-500"><i class="fa-solid fa-sync"></i></button>
+  <!-- Botones de ajuste de tamaño de fuente -->
+  <button id="increase-font" class="font-bold px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-500">A+</button>
+  <button id="decrease-font" class="font-bold px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-500">A-</button>
+  <button id="reset-font" class="font-bold px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-500">
+    <i class="fa-solid fa-sync"></i>
+  </button>
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const body = document.body;
-  const toogle = document.getElementById("toogle");
-  const increaseFontButton = document.getElementById("increase-font");
-  const decreaseFontButton = document.getElementById("decrease-font");
-  const resetFontButton = document.getElementById("reset-font");
+  document.addEventListener("DOMContentLoaded", () => {
+    const body = document.body;
+    const toggleContrastButton = document.getElementById("toggle-contrast");
+    const increaseFontButton = document.getElementById("increase-font");
+    const decreaseFontButton = document.getElementById("decrease-font");
+    const resetFontButton = document.getElementById("reset-font");
 
-  let defaultFontSize = 16; // Tamaño de fuente base
-  let currentFontSize = defaultFontSize;
+    // Tamaño de fuente base
+    const defaultFontSize = parseFloat(getComputedStyle(body).fontSize); 
+    let currentFontScale = 1; // Escala actual en relación al tamaño base
 
-  // Modo oscuro/claro
-  toogle?.addEventListener("change", (event) => {
-    const isChecked = (event.target as HTMLInputElement)?.checked; // Confirma el tipo de evento
-    if (isChecked) {
-      body.classList.add("bg-black", "text-white");
-      body.classList.remove("bg-white", "text-black");
-    } else {
-      body.classList.add("bg-white", "text-black");
-      body.classList.remove("bg-black", "text-white");
-    }
-  });
+    // Límites de la escala (1 = tamaño base)
+    const maxScale = 2.5; 
+    const minScale = 0.75; 
 
-  // Cambiar el tamaño de fuente
-  const updateFontSize = (delta: number) => {
-    const elements = document.querySelectorAll<HTMLElement>("*"); // Selecciona todos los elementos
-    elements.forEach((el) => {
-      const computedStyle = window.getComputedStyle(el);
-      const fontSize = parseFloat(computedStyle.fontSize) || defaultFontSize;
-      el.style.fontSize = `${fontSize + delta}px`;
+    // Función para alternar contraste
+    toggleContrastButton?.addEventListener("click", () => {
+      if (body.classList.contains("bg-black")) {
+        body.classList.add("bg-white", "text-black");
+        body.classList.remove("bg-black", "text-white");
+      } else {
+        body.classList.add("bg-black", "text-white");
+        body.classList.remove("bg-white", "text-black");
+      }
     });
-  };
 
-  // Aumentar tamaño de fuente
-  increaseFontButton?.addEventListener("click", () => {
-    currentFontSize += 2;
-    updateFontSize(2);
-  });
+    // Función para actualizar el tamaño de fuente relativo al tamaño base
+    const updateFontSize = (scaleDelta: number) => {
+      const newScale = currentFontScale + scaleDelta;
 
-  // Disminuir tamaño de fuente
-  decreaseFontButton?.addEventListener("click", () => {
-    if (currentFontSize > 10) {
-      currentFontSize -= 2;
-      updateFontSize(-2);
-    }
-  });
+      // Verificar que la escala esté dentro de los límites
+      if (newScale <= maxScale && newScale >= minScale) {
+        currentFontScale = newScale;
 
-  // Resetear tamaño de fuente
-  resetFontButton?.addEventListener("click", () => {
-    currentFontSize = defaultFontSize;
-    const elements = document.querySelectorAll<HTMLElement>("*");
-    elements.forEach((el) => {
-      el.style.fontSize = ""; // Resetea al estilo predeterminado
+        const elements = document.querySelectorAll("body, body *");
+        elements.forEach((el) => {
+          (el as HTMLElement).style.fontSize = `${defaultFontSize * currentFontScale}px`;
+        });
+      }
+    };
+
+    // Aumentar tamaño de fuente
+    increaseFontButton?.addEventListener("click", () => {
+      updateFontSize(0.1); // Incrementa la escala en un 10%
+    });
+
+    // Disminuir tamaño de fuente
+    decreaseFontButton?.addEventListener("click", () => {
+      updateFontSize(-0.1); // Reduce la escala en un 10%
+    });
+
+    // Resetear tamaño de fuente
+    resetFontButton?.addEventListener("click", () => {
+      currentFontScale = 1; // Restablece la escala a 1 (tamaño base)
+      const elements = document.querySelectorAll("body, body *");
+      elements.forEach((el) => {
+        (el as HTMLElement).style.fontSize = ""; // Elimina el estilo en línea
+      });
     });
   });
-});
 </script>
- -->
+
