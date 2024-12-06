@@ -29,6 +29,9 @@ const handleLocationChange = (event: Event) => {
     }
 };
 
+
+
+
 ---
 
 <section class="search-section">
@@ -76,17 +79,14 @@ const handleLocationChange = (event: Event) => {
                     <button class="close-button">&times;</button>
                 </div>
                 <div class="map-container">
-                    <div class="map-container">
-                        <iframe
-                          src="https://www.openstreetmap.org/export/embed.html?bbox=-76.47171020507812%2C3.8032799214028685%2C-75.83450317382812%2C4.271093750647543&amp;layer=mapnik"
-                          width="100%"
-                          height="100%"
-                          style="border: 1px solid black;"
-                        ></iframe>
-                        <br />
-                        <small>
-                          <a href="https://www.openstreetmap.org/#map=11/4.0372/-76.1531" target="_blank">Ver el mapa más grande</a>
-                        </small>
+                    <iframe
+                        id="mapIframe"
+                        src="https://www.openstreetmap.org/export/embed.html?bbox=-76.47171020507812%2C3.8032799214028685%2C-75.83450317382812%2C4.271093750647543&amp;layer=mapnik"
+                        width="100%"
+                        height="400px"
+                        style="border: 1px solid black;"
+                    ></iframe>
+                    <div id="coordenadas" style="margin-top: 10px; font-weight: bold;"></div>
                 </div>
             </div>
         </div>
@@ -110,6 +110,35 @@ const handleLocationChange = (event: Event) => {
 
     </div>
 </section>
+
+<script type="text/javascript">
+    // Validar acceso a geolocalización y mostrar la ubicación
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(mostrarUbicacion, manejarError);
+    } else {
+        alert("¡Error! Este navegador no soporta la Geolocalización.");
+    }
+
+    // Función para manejar ubicación
+    function mostrarUbicacion(position) {
+        const latitud = position.coords.latitude; // Latitud
+        const longitud = position.coords.longitude; // Longitud
+
+        // Actualizar el iframe del mapa con las coordenadas actuales
+        const iframe = document.querySelector('#mapIframe');
+        const zoom = 10; // Nivel de zoom deseado
+        iframe.src = `https://www.openstreetmap.org/export/embed.html?bbox=${longitud-0.02}%2C${latitud-0.02}%2C${longitud+0.02}%2C${latitud+0.02}&amp;layer=mapnik&marker=${latitud},${longitud}`;
+
+        // Opcional: Mostrar coordenadas al usuario
+        const div = document.getElementById('coordenadas');
+        div.innerHTML = `<br>Latitud: ${latitud}<br>Longitud: ${longitud}`;
+    }
+
+    // Manejo de errores en caso de fallos en la geolocalización
+    function manejarError(error) {
+        alert("No se pudo obtener la ubicación: " + error.message);
+    }
+</script>
 
 <!--script para abrir y cerrar ventana emergente del mapa -->
 <script>
