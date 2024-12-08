@@ -1,6 +1,6 @@
 
 <template>
-    <section class="desktop-view mx-44 my-10 space-y-24 ">
+    <section class="desktop-view  columns-2 mx-44 my-10 space-y-24 ">
         <a :href="`/perfil?${worker.id}`" class="result-item" v-for="worker in workers" :key="worker.id">
             <div class="result-item border border-black shadow-md rounded-lg">
                 <div 
@@ -144,6 +144,10 @@ export default {
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
     
 }
+.result-item {
+    break-inside: avoid; /* Evita que las tarjetas se partan */
+}
+
     @media screen and (max-width: 1024px) {    .desktop-view {
             display: none;    }
     }
