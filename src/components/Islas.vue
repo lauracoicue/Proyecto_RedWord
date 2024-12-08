@@ -3,7 +3,13 @@
     <section class="desktop-view mx-44 my-10 space-y-24 ">
         <a :href="`/perfil?${worker.id}`" class="result-item" v-for="worker in workers" :key="worker.id">
             <div class="result-item border border-black shadow-md rounded-lg">
-                <div class="available-badge">Disponible</div>
+                <div 
+                    class="available-badge" 
+                    :class="{ 'fade-in': worker.isAvailable, 'fade-out': !worker.isAvailable }" 
+                    v-if="worker.isAvailable">
+                    Disponible
+                </div>
+
                     <div class="result-content my-4 mx-7">
                         <div class="text-content">
                             <h3 class="font-bold">{{ worker.fullName }}</h3>
@@ -23,7 +29,12 @@
      <section class="mobile-view mx-44 my-16">
         <a :href="`/perfil?${worker.id}`" class="result-item" v-for="worker in workers" :key="worker.id">
             <div class="result-item border border-black rounded-lg">
-            <div class="available-badge">Disponible</div>
+                <div 
+                    class="available-badge" 
+                    :class="{ 'fade-in': worker.isAvailable, 'fade-out': !worker.isAvailable }" 
+                    v-if="worker.isAvailable">
+                    Disponible
+                </div>
             <div class="result-content my-4 mx-7">
                 <div class="text-content">
                 <h3 class="font-bold">{{ worker.fullName }}</h3>
@@ -43,17 +54,16 @@
 </template>
 
 <script>
+import { io } from "socket.io-client"; // Importar Socket.IO client
 
 export default {
     data() {
         return {
-            workers: []
+            workers: [], 
+            socket: null, 
         };
     },
     created() {
-        console.log('Componente Prueba.vue creado');
-        console.log('Obteniendo resultados...');
-        console.log(window.location.href);
         this.obtenerResultados();
     },
     methods: {
@@ -61,25 +71,68 @@ export default {
             try {
                 const localUrl = window.location.search;
                 const searchParams = new URLSearchParams(localUrl);
-                const category = searchParams.get('category');
-                const service = searchParams.get('service') || '';
-                const response = await fetch(`http://localhost:3000/api/workers/category/${category}?search=${service}`);
-                const data = await response.json();
+                const category = searchParams.get("category");
+                const service = searchParams.get("service") || "";
+
+                console.log("Categoría:", category, "Servicio:", service);  
+               
+                const response = await fetch(
+                    `http://localhost:3000/api/workers/category/${category}?search=${service}`
+                );
+                const { refreshResult, channel, data, client } = await response.json();
+                console.log("Datos obtenidos:", refreshResult, channel, data, client );
                 this.workers = data;
+                console.log("Resultados:", data);   
+                this.iniciarSocket(refreshResult, channel, client);
             } catch (error) {
-                console.error('Error al obtener los resultados:', error);
+                console.error("Error al obtener los resultados:", error);
             }
+        },
+        iniciarSocket(host, channel, id) {
+            console.log("Conectando al socket:", host, "canal:", channel, "id:", id);
+            this.socket = io(host, {
+                query: {
+                    id: id,
+                },
+                transports: ["websocket"]
+            });
+            this.socket.on(channel, (newData) => {
+                console.log("Actualización recibida del socket:", newData);
+                this.workers = this.workers.map((worker) => {
+                    if (worker.id === newData.id) {
+                        worker.isAvailable = newData.isAvailable;
+                    }
+                    return worker;
+                });
+                
+            });
+
+        },
+    },
+    beforeDestroy() {
+        if (this.socket) {
+            this.socket.disconnect();
         }
-    }
+    },
 };
 </script>
 
 <style>
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.3s ease-in;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
 .parrafo{
     width: 300px;
     overflow: hidden;
     display: -webkit-box; 
-    -webkit-line-clamp: 3; 
     -webkit-box-orient: vertical; 
     text-overflow: ellipsis; 
     white-space: normal;
