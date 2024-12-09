@@ -31,7 +31,6 @@ import Trabajos_Realizados from "../components/Trabajos_Realizados.astro";
             </svg>
             <h1 class="mx-10 text-lg">Contactar</h1>
         </button>
-        
     </div> 
         <Trabajos_Realizados/>
         <Puntuacion/>
@@ -57,12 +56,11 @@ import Trabajos_Realizados from "../components/Trabajos_Realizados.astro";
                     <button class="contact-button bg-green-500 text-white font-bold text-center text-xs p-2 rounded-full w-30">
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48" class="size-7 absolute text-white mx-2 -my-1/2">
                             <path fill="#fff" d="M4.868,43.303l2.694-9.835C5.9,30.59,5.026,27.324,5.027,23.979C5.032,13.514,13.548,5,24.014,5c5.079,0.002,9.845,1.979,13.43,5.566c3.584,3.588,5.558,
-                            8.356,5.556,13.428c-0.004,10.465-8.522,18.98-18.986,18.98c-0.001,0,0,0,0,0h-0.008c-3.177-0.001-6.3-0.798-9.073-2.311L4.868,43.303z"></path>
+                                8.356,5.556,13.428c-0.004,10.465-8.522,18.98-18.986,18.98c-0.001,0,0,0,0,0h-0.008c-3.177-0.001-6.3-0.798-9.073-2.311L4.868,43.303z"></path>
                         </svg>
                         <h1 class="mx-10 text-lg">Contactar</h1>
                     </button>
-                </div>
-                
+                </div> 
             </div>
         </div>
         <div class="flex flex-col container desktop-view">
@@ -184,22 +182,46 @@ import Trabajos_Realizados from "../components/Trabajos_Realizados.astro";
     });
 
     async function load() {
-        const id = window.location.search.split('?')[1];
-        const response = await fetch(`http://localhost:3000/api/workers/${id}`);
-        const worker = await response.json();
-        const img = document.createElement('img');
-        const link = worker.link;  // Ahora link está definido y disponible
-        img.src = worker.photo;
-        img.alt = 'Foto de perfil';
-        for (let i = 0; i < document.querySelectorAll('.photo').length; i++) {
-            document.querySelectorAll('.photo')[i].appendChild(img);
-            document.querySelectorAll('.fullName')[i].textContent = worker.fullName;
-            document.querySelectorAll('.job')[i].textContent = worker.job;
+        const id = window.location.search.split('?')[1]; // Obtener el ID desde la URL
+        try {
+            const response = await fetch(`http://localhost:3000/api/workers/${id}`);
+            const worker = await response.json();
+
+            // Validar si existe el atributo `link`
+            if (!worker.link) {
+                console.error('El atributo "link" no está definido en el trabajador');
+                return;
+            }
+            
+            const img = document.createElement('img');
+            img.src = worker.photo;
+            img.alt = 'Foto de perfil';
+
+            // Llenar los datos en los contenedores correspondientes
+            document.querySelectorAll('.photo').forEach((container) => {
+                container.innerHTML = ''; // Limpiar contenido previo
+                container.appendChild(img);
+            });
+
+            document.querySelectorAll('.fullName').forEach((name) => {
+                name.textContent = worker.fullName;
+            });
+
+            document.querySelectorAll('.job').forEach((job) => {
+                job.textContent = worker.job;
+            });
+
+            // Añadir evento a todos los botones de contacto
+            document.querySelectorAll('.contact-button').forEach((contactButton) => {
+                contactButton.addEventListener('click', () => {
+                    window.location.href = worker.link; // Redirigir al enlace
+                });
+            });
+        } catch (error) {
+            console.error('Error al cargar los datos del trabajador:', error);
         }
-        document.querySelector('.contact-button')?.addEventListener('click', () => {
-            window.location.href = link;  // Aquí se usa el link que obtuviste en la función load()
-        });
     }
 
     load();
 </script>
+
