@@ -70,32 +70,10 @@ import Trabajos_Realizados from "../components/Trabajos_Realizados.astro";
             </div>
             <section class="desktop-view my-10">
                 <div class="my-20 grid grid-cols-2 gap-10 overflow-y-auto h-96">
-                  <div class="flex items-center justify-center border rounded-3xl border-gray-200 bg-gray-200 h-80">
-                    <h2>Mi trabajo</h2>
-                  </div>
-                  <div class="flex items-center justify-center border rounded-3xl border-gray-200 bg-gray-200 h-80">
-                    <h2>Mi trabajo</h2>
-                  </div>
-                  <div class="flex items-center justify-center border rounded-3xl border-gray-200 bg-gray-200 h-80">
-                    <h2>Mi trabajo</h2>
-                  </div>
-                  <div class="flex items-center justify-center border rounded-3xl border-gray-200 bg-gray-200 h-80">
-                    <h2>Mi trabajo</h2>
-                  </div>
-                  <div class="flex items-center justify-center border rounded-3xl border-gray-200 bg-gray-200 h-80">
-                    <h2>Mi trabajo</h2>
-                  </div>
-                  <div class="flex items-center justify-center border rounded-3xl border-gray-200 bg-gray-200 h-80">
-                    <h2>Mi trabajo</h2>
-                  </div>
-                  <div class="flex items-center justify-center border rounded-3xl border-gray-200 bg-gray-200 h-80">
-                    <h2>Mi trabajo</h2>
-                  </div>
-                  <div class="flex items-center justify-center border rounded-3xl border-gray-200 bg-gray-200 h-80">
-                    <h2>Mi trabajo</h2>
-                  </div>
+                    <!-- Aquí se insertarán dinámicamente las imágenes desde el script -->
                 </div>
-            </section>              
+            </section>
+                         
         </div>
     </main>
 </Layout>
@@ -172,56 +150,75 @@ import Trabajos_Realizados from "../components/Trabajos_Realizados.astro";
 
 </style>
 <script>
-    document.querySelectorAll('.toggle-button button').forEach((button) => {
-        button.addEventListener('click', () => {
-            document.querySelectorAll('.toggle-button button').forEach((btn) => {
-                btn.classList.remove('active');
-            });
-            button.classList.add('active');
-        });
-    });
-
     async function load() {
-        const id = window.location.search.split('?')[1]; // Obtener el ID desde la URL
-        try {
-            const response = await fetch(`http://localhost:3000/api/workers/${id}`);
-            const worker = await response.json();
+    const id = window.location.search.split('?')[1]; // Obtener el ID desde la URL
+    try {
+        const response = await fetch(`http://localhost:3000/api/workers/${id}`);
+        const worker = await response.json();
 
-            // Validar si existe el atributo `link`
-            if (!worker.link) {
-                console.error('El atributo "link" no está definido en el trabajador');
-                return;
-            }
+        // Validar si existe el atributo `link`
+        if (!worker.link) {
+            console.error('El atributo "link" no está definido en el trabajador');
+            return;
+        }
+
+        // Validar si existen imágenes en `workImages`
+        if (!worker.workImages || worker.workImages.length === 0) {
+            console.error('No se encontraron imágenes en workImages');
+            return;
+        }
+
+        const img = document.createElement('img');
+        img.src = worker.photo;
+        img.alt = 'Foto de perfil';
+
+        // Llenar los datos en los contenedores correspondientes
+        document.querySelectorAll('.photo').forEach((container) => {
+            container.innerHTML = ''; // Limpiar contenido previo
+            container.appendChild(img);
+        });
+
+        document.querySelectorAll('.fullName').forEach((name) => {
+            name.textContent = worker.fullName;
+        });
+
+        document.querySelectorAll('.job').forEach((job) => {
+            job.textContent = worker.job;
+        });
+
+        // Añadir evento a todos los botones de contacto
+        document.querySelectorAll('.contact-button').forEach((contactButton) => {
+            contactButton.addEventListener('click', () => {
+                window.location.href = worker.link; // Redirigir al enlace
+            });
+        });
+
+        // Mostrar las imágenes de `workImages` en la sección específica
+        const workImagesContainer = document.querySelector('.desktop-view .grid');
+        if (workImagesContainer) {
+            workImagesContainer.innerHTML = ''; // Limpiar contenido previo
+        }
+
+        worker.workImages.forEach((imageUrl: string) => {
+            const imageDiv = document.createElement('div');
+            imageDiv.className = 'flex items-center justify-center border rounded-3xl border-gray-200 bg-gray-200 h-80';
             
             const img = document.createElement('img');
-            img.src = worker.photo;
-            img.alt = 'Foto de perfil';
+            img.src = imageUrl;
+            img.alt = 'Imagen del trabajo';
+            img.className = 'w-full h-full object-cover rounded-3xl';
 
-            // Llenar los datos en los contenedores correspondientes
-            document.querySelectorAll('.photo').forEach((container) => {
-                container.innerHTML = ''; // Limpiar contenido previo
-                container.appendChild(img);
-            });
-
-            document.querySelectorAll('.fullName').forEach((name) => {
-                name.textContent = worker.fullName;
-            });
-
-            document.querySelectorAll('.job').forEach((job) => {
-                job.textContent = worker.job;
-            });
-
-            // Añadir evento a todos los botones de contacto
-            document.querySelectorAll('.contact-button').forEach((contactButton) => {
-                contactButton.addEventListener('click', () => {
-                    window.location.href = worker.link; // Redirigir al enlace
-                });
-            });
-        } catch (error) {
-            console.error('Error al cargar los datos del trabajador:', error);
-        }
+            imageDiv.appendChild(img);
+            if (workImagesContainer) {
+                workImagesContainer.appendChild(imageDiv);
+            }
+        });
+    } catch (error) {
+        console.error('Error al cargar los datos del trabajador:', error);
     }
+}
 
-    load();
+load();
+
 </script>
 
