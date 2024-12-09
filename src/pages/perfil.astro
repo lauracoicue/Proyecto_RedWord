@@ -68,9 +68,15 @@ import Trabajos_Realizados from "../components/Trabajos_Realizados.astro";
                 <button class="active">Trabajos</button>
                 <button>Reseñas</button>
             </div>
-            <section class="desktop-view my-10">
+            <section class="desktop-view my-10 trabajos-section">
                 <div class="my-20 grid grid-cols-2 gap-10 overflow-y-auto h-96">
                     <!-- Aquí se insertarán dinámicamente las imágenes desde el script -->
+                </div>
+            </section>
+            
+            <section class="desktop-view reseñas-section hidden">
+                <div class="my-20 grid grid-cols-2 gap-10 overflow-y-auto h-96">
+                    <!-- Aquí se agregarán las reseñas dinámicamente -->
                 </div>
             </section>
                          
@@ -222,11 +228,29 @@ load();
 
 document.querySelectorAll('.toggle-button button').forEach((button) => {
     button.addEventListener('click', () => {
-    document.querySelectorAll('.toggle-button button').forEach((btn) => {
-      btn.classList.remove('active');
+        // Cambiar la clase 'active' en los botones
+        document.querySelectorAll('.toggle-button button').forEach((btn) => {
+            btn.classList.remove('active');
+        });
+        button.classList.add('active');
+
+        // Alternar entre las secciones de trabajos y reseñas
+        const isTrabajos = button.textContent === "Trabajos"; // Verifica si el botón es "Trabajos"
+        
+        const trabajosSection = document.querySelector('.trabajos-section');
+        const reseñasSection = document.querySelector('.reseñas-section');
+        
+        if (trabajosSection && reseñasSection) {
+            if (isTrabajos) {
+                trabajosSection.classList.remove('hidden');
+                reseñasSection.classList.add('hidden');
+            } else {
+                trabajosSection.classList.add('hidden');
+                reseñasSection.classList.remove('hidden');
+            }
+        }
     });
-    button.classList.add('active');
-  });
 });
+
 </script>
 
