@@ -1,120 +1,103 @@
-
 <template>
-    <section class="desktop-view  columns-2 mx-44 my-10 space-y-24 ">
-        <a :href="`/perfil?${worker.id}`" class="result-item" v-for="worker in workers" :key="worker.id">
-            <div class="result-item border border-black shadow-md rounded-lg">
-                <div 
-                    class="available-badge" 
-                    :class="{ 'fade-in': worker.isAvailable, 'fade-out': !worker.isAvailable }" 
-                    v-if="worker.isAvailable">
-                    Disponible
-                </div>
-
-                    <div class="result-content my-4 mx-7">
-                        <div class="text-content">
-                            <h3 class="font-bold">{{ worker.fullName }}</h3>
-                            <p class="parrafo">{{ worker.job }}</p>
-                        <div class="rating">
-                            <span>⭐ 4.5 / 5.0</span>
-                        </div>
-                            <button class="contact-btn"><i class="fab fa-whatsapp"></i> Contactar</button>
-                        </div>
-                        <div class="image-content">
-                        <img :src="worker.photo" :alt="`Foto de ${worker.fullName}`">
-                    </div>
-                </div>
+    <section class="desktop-view columns-2 mx-44 my-10 space-y-24">
+      <a :href="`/perfil?${worker.id}`" class="result-item" v-for="worker in workers" :key="worker.id">
+        <div class="result-item border border-black shadow-md rounded-lg">
+          <div
+            class="available-badge"
+            :class="{ 'fade-in': worker.isAvailable, 'fade-out': !worker.isAvailable }"
+            v-if="worker.isAvailable"
+          >
+            Disponible
+          </div>
+          <div class="result-content my-4 mx-7">
+            <div class="text-content">
+              <h3 class="font-bold">{{ worker.fullName }}</h3>
+              <p class="parrafo">{{ worker.job }}</p>
+              <div class="rating">
+                <span>⭐ 4.5 / 5.0</span>
+              </div>
+              <button
+                class="contact-btn"
+                @click="redirectToContact(worker.link)"
+              >
+                <i class="fab fa-whatsapp"></i> Contactar
+              </button>
             </div>
-        </a>
+            <div class="image-content">
+              <img :src="worker.photo" :alt="`Foto de ${worker.fullName}`" />
+            </div>
+          </div>
+        </div>
+      </a>
     </section>
-     <section class="mobile-view mx-44 my-16">
-        <a :href="`/perfil?${worker.id}`" class="result-item" v-for="worker in workers" :key="worker.id">
-            <div class="result-item border border-black rounded-lg">
-                <div 
-                    class="available-badge" 
-                    :class="{ 'fade-in': worker.isAvailable, 'fade-out': !worker.isAvailable }" 
-                    v-if="worker.isAvailable">
-                    Disponible
-                </div>
-            <div class="result-content my-4 mx-7">
-                <div class="text-content">
-                <h3 class="font-bold">{{ worker.fullName }}</h3>
-                <p class="parrafo">{{ worker.job }}</p>
-                <div class="rating">
-                    <span>⭐ 4.5 / 5.0</span>
-                </div>
-                <button class="contact-btn"><i class="fab fa-whatsapp"></i> Contactar</button>
-                </div>
-                <div class="image-content">
-                <img :src="worker.photo" :alt="`Foto de ${worker.fullName}`">
-                </div>
-            </div>
-            </div>
-        </a>
-    </section>
-</template>
+  </template>
+  
 
 <script>
-import { io } from "socket.io-client"; // Importar Socket.IO client
-
 export default {
-    data() {
-        return {
-            workers: [], 
-            socket: null, 
-        };
-    },
-    created() {
-        this.obtenerResultados();
-    },
-    methods: {
-        async obtenerResultados() {
-            try {
-                const localUrl = window.location.search;
-                const searchParams = new URLSearchParams(localUrl);
-                const category = searchParams.get("category");
-                const service = searchParams.get("service") || "";
+  data() {
+    return {
+      workers: [], // Datos de los trabajadores
+      socket: null, // Socket.io
+    };
+  },
+  created() {
+    this.obtenerResultados();
+  },
+  methods: {
+    async obtenerResultados() {
+      try {
+        const localUrl = window.location.search;
+        const searchParams = new URLSearchParams(localUrl);
+        const category = searchParams.get("category");
+        const service = searchParams.get("service") || "";
 
-                console.log("Categoría:", category, "Servicio:", service);  
-               
-                const response = await fetch(
-                    `http://localhost:3000/api/workers/category/${category}?search=${service}`
-                );
-                const { refreshResult, channel, data, client } = await response.json();
-                console.log("Datos obtenidos:", refreshResult, channel, data, client );
-                this.workers = data;
-                console.log("Resultados:", data);   
-                this.iniciarSocket(refreshResult, channel, client);
-            } catch (error) {
-                console.error("Error al obtener los resultados:", error);
-            }
-        },
-        iniciarSocket(host, channel, id) {
-            console.log("Conectando al socket:", host, "canal:", channel, "id:", id);
-            this.socket = io(host, {
-                query: {
-                    id: id,
-                },
-                transports: ["websocket"]
-            });
-            this.socket.on(channel, (newData) => {
-                console.log("Actualización recibida del socket:", newData);
-                this.workers = this.workers.map((worker) => {
-                    if (worker.id === newData.id) {
-                        worker.isAvailable = newData.isAvailable;
-                    }
-                    return worker;
-                });
-                
-            });
+        console.log("Categoría:", category, "Servicio:", service);
 
+        const response = await fetch(
+          `http://localhost:3000/api/workers/category/${category}?search=${service}`
+        );
+        const { refreshResult, channel, data, client } = await response.json();
+        console.log("Datos obtenidos:", refreshResult, channel, data, client);
+        this.workers = data;
+        this.iniciarSocket(refreshResult, channel, client);
+      } catch (error) {
+        console.error("Error al obtener los resultados:", error);
+      }
+    },
+    redirectToContact(link) {
+      if (link) {
+        window.open(link, "_blank"); // Abrir el enlace en una nueva pestaña
+      } else {
+        alert("No hay enlace disponible para contactar a este trabajador.");
+      }
+    },
+    iniciarSocket(host, channel, id) {
+      console.log("Conectando al socket:", host, "canal:", channel, "id:", id);
+      this.socket = io(host, {
+        query: {
+          id: id,
         },
+        transports: ["websocket"],
+      });
+      this.socket.on(channel, (newData) => {
+        console.log("Actualización recibida del socket:", newData);
+        this.workers = this.workers.map((worker) => {
+          if (worker.id === newData.id) {
+            worker.isAvailable = newData.isAvailable;
+          }
+          return worker;
+        });
+      });
     },
-    beforeDestroy() {
-        if (this.socket) {
-            this.socket.disconnect();
-        }
-    },
+  },
+  beforeDestroy() {
+    if (this.socket) {
+      this.socket.disconnect();
+    }
+  },
 };
+
 </script>
 
 <style>
