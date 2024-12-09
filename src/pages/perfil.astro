@@ -220,5 +220,13 @@ import Trabajos_Realizados from "../components/Trabajos_Realizados.astro";
 
 load();
 
+document.querySelectorAll('.toggle-button button').forEach((button) => {
+    button.addEventListener('click', () => {
+    document.querySelectorAll('.toggle-button button').forEach((btn) => {
+      btn.classList.remove('active');
+    });
+    button.classList.add('active');
+  });
+});
 </script>
 
