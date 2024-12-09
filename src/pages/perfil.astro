@@ -71,7 +71,7 @@ import Trabajos_Realizados from "../components/Trabajos_Realizados.astro";
             
             <section class="desktop-view reseñas-section hidden">
                 <div class="my-20 grid grid-cols-2 gap-10 overflow-y-auto h-96">
-                    <Puntuacion/>
+                  
                     
                 </div>
             </section>
@@ -156,8 +156,9 @@ import Trabajos_Realizados from "../components/Trabajos_Realizados.astro";
     const id = window.location.search.split('?')[1]; // Obtener el ID desde la URL
     try {
         const response = await fetch(`http://localhost:3000/api/workers/${id}`);
-        const ratingsResponse = await fetch(`http://localhost:3000/api/ratings/${id}`);
         const worker = await response.json();
+        
+        const ratingsResponse = await fetch(`http://localhost:3000/api/ratings/${id}`);
         const ratings = await ratingsResponse.json();
 
 
@@ -189,10 +190,7 @@ import Trabajos_Realizados from "../components/Trabajos_Realizados.astro";
 
         document.querySelectorAll('.reseñas-section').forEach((reseñasSection) => {
             ratings.ratings.forEach((rating:any) => {
-/*
-                <div class="felx flex-col ">
-        <h2 class=" text-gray-600">Laura Tatiana
-            <h3 class=" text-gray-600 "> 8 de noviembre de 2024</h2> */
+
                 const div = document.createElement('div');
                 div.className = 'flex flex-col';
 
