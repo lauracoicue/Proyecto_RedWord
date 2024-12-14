@@ -30,7 +30,7 @@
         </div>
       </a>
     </section>
-    <section class="mobile-view flex flex-col mx-44 my-10 space-y-24">
+    <section class="mobile-view flex flex-col mx-44 my-16 space-y-24">
       <a :href="`/perfil?${worker.id}`" class="result-item" v-for="worker in workers" :key="worker.id">
         <div class="result-item border border-black shadow-md rounded-lg">
           <div
@@ -40,7 +40,7 @@
           >
             Disponible
           </div>
-          <div class="result-content my-4 mx-7">
+          <div class="result-content pe9 my-4 mx-7">
             <div class="text-content">
               <h3 class="font-bold">{{ worker.fullName }}</h3>
               <p class="parrafo">{{ worker.job }}</p>
@@ -48,14 +48,14 @@
                 <span>⭐ 4.5 / 5.0</span>
               </div>
               <button
-                class="contact-btn"
+                class="contact-btn my-9"
                 @click="redirectToContact(worker.link)"
               >
                 <i class="fab fa-whatsapp"></i> Contactar
               </button>
             </div>
-            <div class="image-content">
-              <img :src="worker.photo" :alt="`Foto de ${worker.fullName}`" />
+            <div class="image-content -my-40 mx-56 absolute">
+              <img :src="worker.photo" :alt="`Foto de ${worker.fullName}`"/>
             </div>
           </div>
         </div>
@@ -133,13 +133,6 @@ export default {
 
 <style>
 
-@media screen and (max-width: 1024px) {    .desktop-view {
-            display: none;    }
-    }
-	@media screen and (min-width: 1023px) {    .mobile-view {
-			display: none;    }
-	}
-
 .fade-in {
     opacity: 1;
     transition: opacity 0.3s ease-in;
@@ -175,7 +168,6 @@ export default {
 	@media screen and (min-width: 1023px) {    .mobile-view {
 			display: none;    }
 	}
-
 </style>
 
 <!---
