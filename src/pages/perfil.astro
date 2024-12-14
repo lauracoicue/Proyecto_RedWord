@@ -84,7 +84,21 @@ import Layout from "../layouts/Layout.astro";
                     </div>
                 </section>
             </div>
-        </main>        
+            <section class="desktop-view my-10 trabajos-section">
+                <div class="my-20 grid grid-cols-2 gap-10 overflow-y-auto h-96">
+                    <!-- Aquí se insertarán dinámicamente las imágenes desde el script -->
+                </div>
+            </section>
+            
+            <section class="desktop-view reseñas-section hidden">
+                <div class="my-20 grid grid-cols-2 gap-10 overflow-y-auto h-96">
+                  
+                    
+                </div>
+            </section>
+                         
+        </div>
+    </main>
 </Layout>
 <style>
     @media screen and (max-width: 1024px) {    .desktop-view {
@@ -188,8 +202,9 @@ import Layout from "../layouts/Layout.astro";
     const id = window.location.search.split('?')[1]; // Obtener el ID desde la URL
     try {
         const response = await fetch(`http://localhost:3000/api/workers/${id}`);
-        const ratingsResponse = await fetch(`http://localhost:3000/api/ratings/${id}`);
         const worker = await response.json();
+        
+        const ratingsResponse = await fetch(`http://localhost:3000/api/ratings/${id}`);
         const ratings = await ratingsResponse.json();
 
 
