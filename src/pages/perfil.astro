@@ -81,7 +81,7 @@ import Layout from "../layouts/Layout.astro";
                         <!-- Aquí se insertarán dinámicamente las imágenes desde el script -->
                     </div>
                 </section>
-                <section class="desktop-view reseñas-section hidden">
+                <section class="desktop-view reseñas-section ">
                     <div class="my-20 grid grid-cols-2 gap-10 overflow-y-auto h-96">
                         <!-- Aquí se insertarán dinámicamente las reseñas desde el script -->
                     </div>
@@ -189,6 +189,7 @@ import Layout from "../layouts/Layout.astro";
         }
 </style>
 <script>
+    
     async function load() {
     const id = window.location.search.split('?')[1]; // Obtener el ID desde la URL
     try {
@@ -197,7 +198,6 @@ import Layout from "../layouts/Layout.astro";
         
         const ratingsResponse = await fetch(`http://localhost:3000/api/ratings/${id}`);
         const ratings = await ratingsResponse.json();
-
 
         // Validar si existe el atributo `link`
         if (!worker.link) {
@@ -228,7 +228,7 @@ import Layout from "../layouts/Layout.astro";
 
         document.querySelectorAll('.reseñas-section').forEach((reseñasSection) => {
             ratings.ratings.forEach((rating:any) => {
-
+                console.log('rating', rating);
                 const div = document.createElement('div');
                 div.className = 'flex flex-col';
 
@@ -251,6 +251,7 @@ import Layout from "../layouts/Layout.astro";
                 puntuacion.appendChild(calificacion);              
                 reseñasSection.appendChild(puntuacion);
             });
+            console.log(reseñasSection);
         });
 
         document.querySelectorAll('.fullName').forEach((name) => {
